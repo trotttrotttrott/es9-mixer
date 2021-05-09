@@ -1,0 +1,8 @@
+.Status {
+  line-height: 25px;
+  font-size: 15px;
+}
+
+.Status .false {
+  color: red;
+}
