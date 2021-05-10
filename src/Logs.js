@@ -11,8 +11,9 @@ class Logs extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      logs: `This version is for ES-9 firmware v1.2.0 and above.
+      log: `This version is for ES-9 firmware v1.2.0 and above.
 
 ES-9 MIDI input ID: ${props.es9.inputID}
 ES-9 MIDI output ID: ${props.es9.outputID}
@@ -21,15 +22,12 @@ ES-9 MIDI output ID: ${props.es9.outputID}
       rx: 'Received Messages:\n',
       tx: 'Transmitted Messages:\n'
     };
-    this.logs = React.createRef();
-    props.midi.inputs.get(props.es9.inputID).onmidimessage = this.onMIDIMessage.bind(this);
 
-    var nybbleChar = function(n) {
-      if (n >= 10) {
-        return String.fromCharCode('A'.charCodeAt( 0 ) + n - 10);
-      }
-      return String.fromCharCode('0'.charCodeAt( 0 ) + n);
-    }
+    this.logRef = React.createRef();
+    this.rxRef = React.createRef();
+    this.txRef = React.createRef();
+
+    props.midi.inputs.get(props.es9.inputID).onmidimessage = this.onMIDIMessage.bind(this);
 
     this.MIDIMessageTypes = {
       0x32: {
@@ -54,6 +52,12 @@ ES-9 MIDI output ID: ${props.es9.outputID}
       0x12: {
         type: 'Usage',
         parse: function(data) {
+          var nybbleChar = function(n) {
+            if (n >= 10) {
+              return String.fromCharCode('A'.charCodeAt(0) + n - 10);
+            }
+            return String.fromCharCode('0'.charCodeAt(0) + n);
+          }
           data = data.slice(6, -1);
           var i;
           var u0 = 0, u1 = 0;
@@ -73,7 +77,9 @@ ES-9 MIDI output ID: ${props.es9.outputID}
   }
 
   componentDidUpdate() {
-    this.logs.current.scrollTop = this.logs.current.scrollHeight;
+    this.logRef.current.scrollTop = this.logRef.current.scrollHeight;
+    this.rxRef.current.scrollTop = this.rxRef.current.scrollHeight;
+    this.txRef.current.scrollTop = this.txRef.current.scrollHeight;
   }
 
   onMIDIMessage(message) {
@@ -85,7 +91,7 @@ ES-9 MIDI output ID: ${props.es9.outputID}
   log(data) {
     var time = new Date().toLocaleTimeString();
     this.setState({
-      logs: `${this.state.logs}${time}: ${data}\n`
+      log: `${this.state.log}${time}: ${data}\n`
     });
   }
 
@@ -139,8 +145,8 @@ ES-9 MIDI output ID: ${props.es9.outputID}
           <Grid item xs={4}>
             <TextareaAutosize
               readOnly
-              ref={this.logs}
-              value={this.state.logs}
+              ref={this.logRef}
+              value={this.state.log}
               rowsMin={10}
               rowsMax={10}
             />
@@ -148,6 +154,7 @@ ES-9 MIDI output ID: ${props.es9.outputID}
           <Grid item xs={4}>
             <TextareaAutosize
               readOnly
+              ref={this.txRef}
               value={this.state.tx}
               rowsMin={10}
               rowsMax={10}
@@ -156,6 +163,7 @@ ES-9 MIDI output ID: ${props.es9.outputID}
           <Grid item xs={4}>
             <TextareaAutosize
               readOnly
+              ref={this.rxRef}
               value={this.state.rx}
               rowsMin={10}
               rowsMax={10}
