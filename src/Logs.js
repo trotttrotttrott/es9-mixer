@@ -1,5 +1,10 @@
 import React from 'react';
-import { Button, ButtonGroup, Grid } from '@material-ui/core';
+import {
+  Button,
+  ButtonGroup,
+  Grid,
+  TextareaAutosize
+} from '@material-ui/core';
 import './Logs.css';
 
 class Logs extends React.Component {
@@ -30,7 +35,7 @@ ES-9 MIDI output ID: ${props.es9.outputID}
 
   requestVersion() {
     var output = this.props.midi.outputs.get(this.props.es9.outputID);
-    var arr = [ 0xF0, 0x00, 0x21, 0x27, 0x19, 0x22, 0xF7 ];
+    var arr = [0xF0, 0x00, 0x21, 0x27, 0x19, 0x22, 0xF7];
     this.log('Sending version request to ES-9...');
     output.send(arr);
   }
@@ -45,13 +50,29 @@ ES-9 MIDI output ID: ${props.es9.outputID}
         </div>
         <Grid container spacing={1}>
           <Grid item xs={4}>
-            <textarea id="log" readOnly value={this.state.logs}></textarea>
+            <TextareaAutosize
+              id="log"
+              readOnly
+              value={this.state.logs}
+              rowsMin={10}
+              rowsMax={10}
+            />
           </Grid>
           <Grid item xs={4}>
-            <textarea id="txSysex" readOnly></textarea>
+            <TextareaAutosize
+              readOnly
+              value={this.state.txSysex}
+              rowsMin={10}
+              rowsMax={10}
+            />
           </Grid>
           <Grid item xs={4}>
-            <textarea id="rxSysex" readOnly></textarea>
+            <TextareaAutosize
+              readOnly
+              value={this.state.rxSysex}
+              rowsMin={10}
+              rowsMax={10}
+            />
           </Grid>
         </Grid>
       </div>
