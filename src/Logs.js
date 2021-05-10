@@ -17,10 +17,39 @@ class Logs extends React.Component {
 ES-9 MIDI input ID: ${props.es9.inputID}
 ES-9 MIDI output ID: ${props.es9.outputID}
 
-`
+`,
+      rx: 'Received Messages:\n',
+      tx: 'Transmitted Messages:\n'
     };
     this.logs = React.createRef();
     props.midi.inputs.get(props.es9.inputID).onmidimessage = this.onMIDIMessage.bind(this);
+
+    this.MIDIMessageTypes = {
+      0x32: {
+        type: 'Version',
+        parse: function(data) {
+          return `Version ${String.fromCharCode.apply(null, data.slice(6, -1))}`;
+        }
+      },
+      0x10: {
+        type: 'Config Dump',
+        parse: function(data) {
+          return data;
+        }
+      },
+      0x11: {
+        type: 'Mix Dump',
+        parse: function(data) {
+          return data;
+        }
+      },
+      0x12: {
+        type: 'Usage',
+        parse: function(data) {
+          return data;
+        }
+      }
+    };
   }
 
   componentDidUpdate() {
@@ -29,12 +58,26 @@ ES-9 MIDI output ID: ${props.es9.outputID}
 
   onMIDIMessage(message) {
     this.log(`Received sysex (${message.data.length} bytes)`);
+    var type = this.MIDIMessageTypes[message.data[5]];
+    this.rx(type.parse(message.data));
   }
 
-  log(str) {
+  log(data) {
     var time = new Date().toLocaleTimeString();
     this.setState({
-      logs: `${this.state.logs}${time}: ${str}\n`
+      logs: `${this.state.logs}${time}: ${data}\n`
+    });
+  }
+
+  tx(data) {
+    this.setState({
+      tx: `${this.state.tx}${data}\n`
+    });
+  }
+
+  rx(data) {
+    this.setState({
+      rx: `${this.state.rx}${data}\n`
     });
   }
 
@@ -42,6 +85,7 @@ ES-9 MIDI output ID: ${props.es9.outputID}
     var output = this.props.midi.outputs.get(this.props.es9.outputID);
     var arr = [0xF0, 0x00, 0x21, 0x27, 0x19, 0x22, 0xF7];
     this.log('Sending version request to ES-9...');
+    this.tx(arr);
     output.send(arr);
   }
 
@@ -66,7 +110,7 @@ ES-9 MIDI output ID: ${props.es9.outputID}
           <Grid item xs={4}>
             <TextareaAutosize
               readOnly
-              value={this.state.txSysex}
+              value={this.state.tx}
               rowsMin={10}
               rowsMax={10}
             />
@@ -74,7 +118,7 @@ ES-9 MIDI output ID: ${props.es9.outputID}
           <Grid item xs={4}>
             <TextareaAutosize
               readOnly
-              value={this.state.rxSysex}
+              value={this.state.rx}
               rowsMin={10}
               rowsMax={10}
             />
