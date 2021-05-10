@@ -1,0 +1,9 @@
+.Channel {
+  height: 300px;
+  text-align: center;
+}
+
+.Channel .channel-name {
+  margin-top: 10px;
+  font-size: 75%;
+}
