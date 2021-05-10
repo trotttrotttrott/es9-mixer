@@ -19,7 +19,12 @@ ES-9 MIDI output ID: ${props.es9.outputID}
 
 `
     };
+    this.logs = React.createRef();
     props.midi.inputs.get(props.es9.inputID).onmidimessage = this.onMIDIMessage.bind(this);
+  }
+
+  componentDidUpdate() {
+    this.logs.current.scrollTop = this.logs.current.scrollHeight;
   }
 
   onMIDIMessage(message) {
@@ -51,8 +56,8 @@ ES-9 MIDI output ID: ${props.es9.outputID}
         <Grid container spacing={1}>
           <Grid item xs={4}>
             <TextareaAutosize
-              id="log"
               readOnly
+              ref={this.logs}
               value={this.state.logs}
               rowsMin={10}
               rowsMax={10}
