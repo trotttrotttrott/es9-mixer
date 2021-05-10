@@ -5,12 +5,7 @@ class Status extends React.Component {
 
   constructor(props) {
     super(props);
-    this.message = props.message;
-    if (props.midi) {
-      this.midiSupport = true;
-    } else {
-      this.midiSupport = false;
-    }
+    this.midiSupport = !!props.midi
   }
 
   render() {
@@ -19,7 +14,7 @@ class Status extends React.Component {
         <header>
           <div>
             <span>Web MIDI status: </span>
-            <span className={String(this.midiSupport)}>{this.message}</span>
+            <span className={String(this.midiSupport)}>{this.props.message}</span>
           </div>
         </header>
       </div>
