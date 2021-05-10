@@ -18,20 +18,20 @@ ES-9 MIDI output ID: ${props.es9.outputID}
   }
 
   onMIDIMessage(message) {
-    this.log( "Received sysex (" + message.data.length + " bytes)" );
+    this.log(`Received sysex (${message.data.length} bytes)`);
   }
 
   log(str) {
-    var d = new Date().toLocaleTimeString();
+    var time = new Date().toLocaleTimeString();
     this.setState({
-      logs: this.state.logs + d + ': ' + str + '\n'
+      logs: `${this.state.logs}${time}: ${str}\n`
     });
   }
 
   requestVersion() {
     var output = this.props.midi.outputs.get(this.props.es9.outputID);
     var arr = [ 0xF0, 0x00, 0x21, 0x27, 0x19, 0x22, 0xF7 ];
-    this.log("Sending version request to ES-9...");
+    this.log('Sending version request to ES-9...');
     output.send(arr);
   }
 
