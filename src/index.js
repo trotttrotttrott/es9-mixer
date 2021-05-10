@@ -23,7 +23,7 @@ function render(midi, statusMsg) {
 
   ReactDOM.render(
     <React.StrictMode>
-      <Status midi={midi} message={statusMsg} es9={es9} />
+      <Status midi={midi} message={statusMsg} />
       <Logs midi={midi} es9={es9} />
     </React.StrictMode>,
     document.getElementById('root')

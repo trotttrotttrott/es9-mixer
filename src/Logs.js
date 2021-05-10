@@ -7,7 +7,12 @@ class Logs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      logs: ''
+      logs: `This version is for ES-9 firmware v1.2.0 and above.
+
+ES-9 MIDI input ID: ${props.es9.inputID}
+ES-9 MIDI output ID: ${props.es9.outputID}
+
+`
     };
     props.midi.inputs.get(props.es9.inputID).onmidimessage = this.onMIDIMessage.bind(this);
   }
