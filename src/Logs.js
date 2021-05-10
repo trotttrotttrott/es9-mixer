@@ -24,17 +24,25 @@ ES-9 MIDI output ID: ${props.es9.outputID}
     this.logs = React.createRef();
     props.midi.inputs.get(props.es9.inputID).onmidimessage = this.onMIDIMessage.bind(this);
 
+    var nybbleChar = function(n) {
+      if (n >= 10) {
+        return String.fromCharCode('A'.charCodeAt( 0 ) + n - 10);
+      }
+      return String.fromCharCode('0'.charCodeAt( 0 ) + n);
+    }
+
     this.MIDIMessageTypes = {
       0x32: {
         type: 'Version',
         parse: function(data) {
-          return `Version ${String.fromCharCode.apply(null, data.slice(6, -1))}`;
+          var version = String.fromCharCode.apply(null, data.slice(6, -1));
+          return `Version ${version}`;
         }
       },
       0x10: {
         type: 'Config Dump',
         parse: function(data) {
-          return data;
+          return data.slice(8, -1);
         }
       },
       0x11: {
@@ -46,7 +54,19 @@ ES-9 MIDI output ID: ${props.es9.outputID}
       0x12: {
         type: 'Usage',
         parse: function(data) {
-          return data;
+          data = data.slice(6, -1);
+          var i;
+          var u0 = 0, u1 = 0;
+          var str0 = "", str1 = "";
+          for ( i=0; i<4; ++i ) {
+            var n0 = data[3-i];
+            var n1 = data[7-i];
+            str0 += nybbleChar(n0);
+            str1 += nybbleChar(n1);
+            u0 |= n0 << (4*(3-i));
+            u1 |= n1 << (4*(3-i));
+          }
+          return `${str0} : ${str1}\n${u0} : ${u1} - ${(4096-u0)} : ${(4096-u1)} - ${((u1 - u0) * 100.0 / (4096-u0)).toFixed(1)}%`;
         }
       }
     };
@@ -83,8 +103,24 @@ ES-9 MIDI output ID: ${props.es9.outputID}
 
   requestVersion() {
     var output = this.props.midi.outputs.get(this.props.es9.outputID);
-    var arr = [0xF0, 0x00, 0x21, 0x27, 0x19, 0x22, 0xF7];
-    this.log('Sending version request to ES-9...');
+    var arr = [ 0xF0, 0x00, 0x21, 0x27, 0x19, 0x22, 0xF7 ];
+    this.log('Requesting version');
+    this.tx(arr);
+    output.send(arr);
+  }
+
+  requestConfig() {
+    var output = this.props.midi.outputs.get(this.props.es9.outputID);
+    var arr = [ 0xF0, 0x00, 0x21, 0x27, 0x19, 0x23, 0xF7 ];
+    this.log('Requesting config');
+    this.tx(arr);
+    output.send(arr);
+  }
+
+  requestUsage() {
+    var output = this.props.midi.outputs.get(this.props.es9.outputID);
+    var arr = [ 0xF0, 0x00, 0x21, 0x27, 0x19, 0x2B, 0xF7 ];
+    this.log('Requesting usage');
     this.tx(arr);
     output.send(arr);
   }
@@ -93,8 +129,10 @@ ES-9 MIDI output ID: ${props.es9.outputID}
     return (
       <div className="Logs">
         <div className="buttons">
-          <ButtonGroup variant="contained" size="small">
+          <ButtonGroup size="small" color="secondary">
             <Button onClick={this.requestVersion.bind(this)}>Request ES-9 Version</Button>
+            <Button onClick={this.requestConfig.bind(this)}>Request Config</Button>
+            <Button onClick={this.requestUsage.bind(this)}>Request Usage</Button>
           </ButtonGroup>
         </div>
         <Grid container spacing={1}>
