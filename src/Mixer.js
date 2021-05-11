@@ -8,8 +8,12 @@ class Mixer extends React.Component {
   render() {
 
     var inputs = Array(14).fill(0).map((_, i) =>
-      <Grid item>
-        <Channel name={`Input ${i+1}`} number={i + 1}  />
+      <Grid item key={i + 1}>
+        <Channel
+          number={i + 1}
+          midi={this.props.midi}
+          es9={this.props.es9}
+        />
       </Grid>
     );
 

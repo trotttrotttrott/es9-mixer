@@ -26,7 +26,7 @@ function render(midi, statusMsg) {
     <React.StrictMode>
       <Status midi={midi} message={statusMsg} />
       <Logs midi={midi} es9={es9} />
-      <Mixer />
+      <Mixer midi={midi} es9={es9} />
     </React.StrictMode>,
     document.getElementById('root')
   );
