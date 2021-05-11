@@ -21,6 +21,7 @@ class Channel extends React.Component {
     var output = this.props.midi.outputs.get(this.props.es9.outputID);
     [this.mainMix, this.phonesMix].forEach(function(mix) {
       var arr = [ 0xF0, 0x00, 0x21, 0x27, 0x19, 0x34, mix * 8 + this.es9Channel, val, 0xF7 ];
+      this.props.log.tx(arr);
       output.send(arr);
     }.bind(this));
   }

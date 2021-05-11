@@ -60,6 +60,7 @@ ES-9 MIDI output ID: ${props.es9.outputID}
         <Mixer
           midi={this.props.midi}
           es9={this.props.es9}
+          log={log}
         />
       </>
     )
