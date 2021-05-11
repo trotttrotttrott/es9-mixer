@@ -5,20 +5,57 @@ import Mixer from './Mixer';
 
 class App extends React.Component {
 
+  componentDidMount() {
+    if (navigator.requestMIDIAccess) {
+      navigator.requestMIDIAccess({
+        sysex: true
+      }).then(
+        this.onMIDISuccess.bind(this),
+        this.onMIDIFailure.bind(this)
+      );
+    } else {
+      this.setState({
+        midiSupport: false,
+        statusMessage: 'No MIDI support in your browser.'
+      });
+    }
+  }
 
-  constructor(props) {
-    super(props);
+  onMIDISuccess(midi) {
 
-    this.state = {
+    this.es9 = {};
+    midi.inputs.forEach(function(value, key, map) {
+      if (value.name === 'ES-9 MIDI In') {
+        this.es9.input = value;
+        return
+      }
+    }.bind(this));
+    midi.outputs.forEach(function(value, key, map) {
+      if (value.name === 'ES-9 MIDI Out') {
+        this.es9.output = value;
+        return
+      }
+    }.bind(this));
+
+    this.setState({
+      midiSupport: true,
+      statusMessage: 'OK',
       info: `This version is for ES-9 firmware v1.2.0 and above.
 
-ES-9 MIDI input ID: ${props.es9.input.id}
-ES-9 MIDI output ID: ${props.es9.output.id}
+ES-9 MIDI input ID: ${this.es9.input.id}
+ES-9 MIDI output ID: ${this.es9.output.id}
 
 `,
       rx: 'Received Messages:\n',
       tx: 'Transmitted Messages:\n'
-    };
+    });
+  }
+
+  onMIDIFailure(msg) {
+    this.setState({
+      midiSupport: false,
+      statusMessage: msg
+    });
   }
 
   info(data) {
@@ -42,26 +79,42 @@ ES-9 MIDI output ID: ${props.es9.output.id}
 
   render() {
 
-    const log = { info: this.info.bind(this), rx: this.rx.bind(this), tx: this.tx.bind(this) }
-    const logs = { info: this.state.info, rx: this.state.rx, tx: this.state.tx }
+    if (this.state === null || this.state.midiSupport === null) {
+      return (
+        <>Loading...</>
+      )
+    } else if (!this.state.midiSupport) {
+      return (
+        <>
+          <Status
+            midiSupport={this.state.midiSupport}
+            message={this.state.statusMessage}
+          />
+        </>
+      )
+    } else {
 
-    return (
-      <>
-        <Status
-          midi={this.props.midi}
-          message={this.props.statusMsg}
-        />
-        <Logs
-          es9={this.props.es9}
-          log={log}
-          logs={logs}
-        />
-        <Mixer
-          es9={this.props.es9}
-          log={log}
-        />
-      </>
-    )
+      const log = { info: this.info.bind(this), rx: this.rx.bind(this), tx: this.tx.bind(this) }
+      const logs = { info: this.state.info, rx: this.state.rx, tx: this.state.tx }
+
+      return (
+        <>
+          <Status
+            midiSupport={this.state.midiSupport}
+            message={this.state.statusMessage}
+          />
+          <Logs
+            es9={this.es9}
+            log={log}
+            logs={logs}
+          />
+          <Mixer
+            es9={this.es9}
+            log={log}
+          />
+        </>
+      )
+    }
   }
 }
 
