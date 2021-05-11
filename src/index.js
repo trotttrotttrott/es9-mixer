@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Status from './Status';
-import Logs from './Logs';
-import Mixer from './Mixer';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 function render(midi, statusMsg) {
@@ -24,9 +22,7 @@ function render(midi, statusMsg) {
 
   ReactDOM.render(
     <React.StrictMode>
-      <Status midi={midi} message={statusMsg} />
-      <Logs midi={midi} es9={es9} />
-      <Mixer midi={midi} es9={es9} />
+      <App midi={midi} es9={es9} message={statusMsg} />
     </React.StrictMode>,
     document.getElementById('root')
   );

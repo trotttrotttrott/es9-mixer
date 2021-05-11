@@ -12,17 +12,6 @@ class Logs extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      log: `This version is for ES-9 firmware v1.2.0 and above.
-
-ES-9 MIDI input ID: ${props.es9.inputID}
-ES-9 MIDI output ID: ${props.es9.outputID}
-
-`,
-      rx: 'Received Messages:\n',
-      tx: 'Transmitted Messages:\n'
-    };
-
     this.logRef = React.createRef();
     this.rxRef = React.createRef();
     this.txRef = React.createRef();
@@ -83,55 +72,37 @@ ES-9 MIDI output ID: ${props.es9.outputID}
   }
 
   onMIDIMessage(message) {
-    this.log(`Received sysex (${message.data.length} bytes)`);
+    this.props.log.info(`Received sysex (${message.data.length} bytes)`);
     var type = this.MIDIMessageTypes[message.data[5]];
-    this.rx(type.parse(message.data));
-  }
-
-  log(data) {
-    var time = new Date().toLocaleTimeString();
-    this.setState({
-      log: `${this.state.log}${time}: ${data}\n`
-    });
-  }
-
-  tx(data) {
-    this.setState({
-      tx: `${this.state.tx}${data}\n`
-    });
-  }
-
-  rx(data) {
-    this.setState({
-      rx: `${this.state.rx}${data}\n`
-    });
+    this.props.log.rx(type.parse(message.data));
   }
 
   requestVersion() {
     var output = this.props.midi.outputs.get(this.props.es9.outputID);
     var arr = [ 0xF0, 0x00, 0x21, 0x27, 0x19, 0x22, 0xF7 ];
-    this.log('Requesting version');
-    this.tx(arr);
+    this.props.log.info('Requesting version');
+    this.props.log.tx(arr);
     output.send(arr);
   }
 
   requestConfig() {
     var output = this.props.midi.outputs.get(this.props.es9.outputID);
     var arr = [ 0xF0, 0x00, 0x21, 0x27, 0x19, 0x23, 0xF7 ];
-    this.log('Requesting config');
-    this.tx(arr);
+    this.props.log.info('Requesting config');
+    this.props.log.tx(arr);
     output.send(arr);
   }
 
   requestUsage() {
     var output = this.props.midi.outputs.get(this.props.es9.outputID);
     var arr = [ 0xF0, 0x00, 0x21, 0x27, 0x19, 0x2B, 0xF7 ];
-    this.log('Requesting usage');
-    this.tx(arr);
+    this.props.log.info('Requesting usage');
+    this.props.log.tx(arr);
     output.send(arr);
   }
 
   render() {
+
     return (
       <div className="Logs">
         <div className="buttons">
@@ -146,7 +117,7 @@ ES-9 MIDI output ID: ${props.es9.outputID}
             <TextareaAutosize
               readOnly
               ref={this.logRef}
-              value={this.state.log}
+              value={this.props.logs.info}
               rowsMin={10}
               rowsMax={10}
             />
@@ -155,7 +126,7 @@ ES-9 MIDI output ID: ${props.es9.outputID}
             <TextareaAutosize
               readOnly
               ref={this.txRef}
-              value={this.state.tx}
+              value={this.props.logs.tx}
               rowsMin={10}
               rowsMax={10}
             />
@@ -164,7 +135,7 @@ ES-9 MIDI output ID: ${props.es9.outputID}
             <TextareaAutosize
               readOnly
               ref={this.rxRef}
-              value={this.state.rx}
+              value={this.props.logs.rx}
               rowsMin={10}
               rowsMax={10}
             />
