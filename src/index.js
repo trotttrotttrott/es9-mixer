@@ -9,20 +9,24 @@ function render(midi, statusMsg) {
   var es9 = {};
   midi.inputs.forEach(function(value, key, map) {
     if (value.name === 'ES-9 MIDI In') {
-      es9.inputID = value.id
+      es9.input = value;
       return
     }
   });
   midi.outputs.forEach(function(value, key, map) {
     if (value.name === 'ES-9 MIDI Out') {
-      es9.outputID = value.id
+      es9.output = value;
       return
     }
   });
 
   ReactDOM.render(
     <React.StrictMode>
-      <App midi={midi} es9={es9} message={statusMsg} />
+      <App
+        midi={midi}
+        es9={es9}
+        message={statusMsg}
+      />
     </React.StrictMode>,
     document.getElementById('root')
   );

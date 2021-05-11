@@ -16,7 +16,7 @@ class Logs extends React.Component {
     this.rxRef = React.createRef();
     this.txRef = React.createRef();
 
-    props.midi.inputs.get(props.es9.inputID).onmidimessage = this.onMIDIMessage.bind(this);
+    props.es9.input.onmidimessage = this.onMIDIMessage.bind(this);
 
     this.MIDIMessageTypes = {
       0x32: {
@@ -78,27 +78,24 @@ class Logs extends React.Component {
   }
 
   requestVersion() {
-    var output = this.props.midi.outputs.get(this.props.es9.outputID);
     var arr = [ 0xF0, 0x00, 0x21, 0x27, 0x19, 0x22, 0xF7 ];
     this.props.log.info('Requesting version');
     this.props.log.tx(arr);
-    output.send(arr);
+    this.props.es9.output.send(arr);
   }
 
   requestConfig() {
-    var output = this.props.midi.outputs.get(this.props.es9.outputID);
     var arr = [ 0xF0, 0x00, 0x21, 0x27, 0x19, 0x23, 0xF7 ];
     this.props.log.info('Requesting config');
     this.props.log.tx(arr);
-    output.send(arr);
+    this.props.es9.output.send(arr);
   }
 
   requestUsage() {
-    var output = this.props.midi.outputs.get(this.props.es9.outputID);
     var arr = [ 0xF0, 0x00, 0x21, 0x27, 0x19, 0x2B, 0xF7 ];
     this.props.log.info('Requesting usage');
     this.props.log.tx(arr);
-    output.send(arr);
+    this.props.es9.output.send(arr);
   }
 
   render() {

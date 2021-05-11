@@ -12,8 +12,8 @@ class App extends React.Component {
     this.state = {
       info: `This version is for ES-9 firmware v1.2.0 and above.
 
-ES-9 MIDI input ID: ${props.es9.inputID}
-ES-9 MIDI output ID: ${props.es9.outputID}
+ES-9 MIDI input ID: ${props.es9.input.id}
+ES-9 MIDI output ID: ${props.es9.output.id}
 
 `,
       rx: 'Received Messages:\n',
@@ -52,13 +52,11 @@ ES-9 MIDI output ID: ${props.es9.outputID}
           message={this.props.statusMsg}
         />
         <Logs
-          midi={this.props.midi}
           es9={this.props.es9}
           log={log}
           logs={logs}
         />
         <Mixer
-          midi={this.props.midi}
           es9={this.props.es9}
           log={log}
         />

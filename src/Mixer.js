@@ -11,7 +11,6 @@ class Mixer extends React.Component {
       <Grid item key={i + 1}>
         <Channel
           number={i + 1}
-          midi={this.props.midi}
           es9={this.props.es9}
           log={this.props.log}
         />
