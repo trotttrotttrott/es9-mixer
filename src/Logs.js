@@ -29,37 +29,19 @@ class Logs extends React.Component {
       0x10: {
         type: 'Config Dump',
         parse: function(data) {
-          return data.slice(8, -1);
+          return 'Config dump received\nNo behavior for this message type is implemented';
         }
       },
       0x11: {
         type: 'Mix Dump',
         parse: function(data) {
-          return data;
+          return 'Mix dump received\nNo behavior for this message type is implemented';
         }
       },
       0x12: {
         type: 'Usage',
         parse: function(data) {
-          var nybbleChar = function(n) {
-            if (n >= 10) {
-              return String.fromCharCode('A'.charCodeAt(0) + n - 10);
-            }
-            return String.fromCharCode('0'.charCodeAt(0) + n);
-          }
-          data = data.slice(6, -1);
-          var i;
-          var u0 = 0, u1 = 0;
-          var str0 = "", str1 = "";
-          for ( i=0; i<4; ++i ) {
-            var n0 = data[3-i];
-            var n1 = data[7-i];
-            str0 += nybbleChar(n0);
-            str1 += nybbleChar(n1);
-            u0 |= n0 << (4*(3-i));
-            u1 |= n1 << (4*(3-i));
-          }
-          return `${str0} : ${str1}\n${u0} : ${u1} - ${(4096-u0)} : ${(4096-u1)} - ${((u1 - u0) * 100.0 / (4096-u0)).toFixed(1)}%`;
+          return 'Usage data received\nNo behavior for this message type is implemented';
         }
       }
     };
