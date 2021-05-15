@@ -5,6 +5,12 @@ import Mixer from './Mixer';
 
 class App extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    this.es9 = {};
+  }
+
   componentDidMount() {
     if (navigator.requestMIDIAccess) {
       navigator.requestMIDIAccess({
@@ -23,19 +29,26 @@ class App extends React.Component {
 
   onMIDISuccess(midi) {
 
-    this.es9 = {};
     midi.inputs.forEach(function(value, key, map) {
       if (value.name === 'ES-9 MIDI In') {
         this.es9.input = value;
-        return
+        return;
       }
     }.bind(this));
     midi.outputs.forEach(function(value, key, map) {
       if (value.name === 'ES-9 MIDI Out') {
         this.es9.output = value;
-        return
+        return;
       }
     }.bind(this));
+
+    if ([this.es9.input, this.es9.output].includes(undefined)) {
+      this.setState({
+        midiSupport: false,
+        statusMessage: 'ES-9 not found.'
+      });
+      return;
+    }
 
     this.setState({
       midiSupport: true,
