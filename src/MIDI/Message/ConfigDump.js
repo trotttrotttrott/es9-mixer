@@ -4,14 +4,16 @@ class ConfigDump {
 
   constructor(data) {
     // We're only concerned with mix data.
-    var start = 75;
-    this.mix = Array(128).fill(0).map(function(_, i) {
-      return {
-        volume: data[start + i * 3],
-        mix: i >> 3,
-        channel: i & 7
-      };
-    })
+    var c = 75;
+    this.mix = Array(16).fill(0).map(function(_, mix) {
+      return Array(8).fill(0).map(function(_, channel) {
+        var mix = {
+          volume: data[c],
+        };
+        c += 3;
+        return mix;
+      });
+    });
   }
 }
 
