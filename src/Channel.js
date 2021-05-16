@@ -15,6 +15,7 @@ class Channel extends React.Component {
             value={this.props.volume}
             min={0}
             max={127}
+            disabled={this.props.disable}
           />
         </div>
         <div className="channel-name">

@@ -15,6 +15,7 @@ class Mixes extends React.Component {
             key={i}
             number={i}
             channels={e}
+            disableChannels={this.props.disableChannels[i + 1] || []}
           />
         )
       }

@@ -13,10 +13,11 @@ class Mix extends React.Component {
           <Channel
             number={i + 1}
             volume={e.volume}
+            disable={this.props.disableChannels.includes(i + 1)}
           />
         </Grid>
       );
-    });
+    }.bind(this));
 
     return (
       <div className="Mix">
