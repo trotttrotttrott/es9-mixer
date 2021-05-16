@@ -1,7 +1,5 @@
 import React from 'react';
 import Status from './Status';
-import Logs from './Logs';
-import Mixer from './Mixer';
 
 class App extends React.Component {
 
@@ -71,27 +69,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
     });
   }
 
-  info(data) {
-    var time = new Date().toLocaleTimeString();
-    this.setState({
-      info: `${this.state.info}${time}: ${data}\n`
-    });
-  }
-
-  rx(data) {
-    this.setState({
-      rx: `${this.state.rx}${data}\n`
-    });
-  }
-
-  tx(data) {
-    this.setState({
-      tx: `${this.state.tx}${data}\n`
-    });
-  }
-
   render() {
-
     if (this.state === null || this.state.midiSupport === null) {
       return (
         <>Loading...</>
@@ -106,24 +84,11 @@ ES-9 MIDI output ID: ${this.es9.output.id}
         </>
       )
     } else {
-
-      const log = { info: this.info.bind(this), rx: this.rx.bind(this), tx: this.tx.bind(this) }
-      const logs = { info: this.state.info, rx: this.state.rx, tx: this.state.tx }
-
       return (
         <>
           <Status
             midiSupport={this.state.midiSupport}
             message={this.state.statusMessage}
-          />
-          <Logs
-            es9={this.es9}
-            log={log}
-            logs={logs}
-          />
-          <Mixer
-            es9={this.es9}
-            log={log}
           />
         </>
       )
