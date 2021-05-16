@@ -1,0 +1,11 @@
+.Mixes {
+  margin: 20px 0;
+}
+
+.Mixes > div > .MuiGrid-item {
+  border-left: 1px solid #222;
+}
+
+.Mixes > div > .MuiGrid-item:first-child {
+  border-left: 0;
+}
