@@ -29,6 +29,10 @@ class MIDI extends React.Component {
     props.es9.input.onmidimessage = this.onMIDIMessage.bind(this);
   }
 
+  componentDidMount() {
+    this.requestConfig();
+  }
+
   componentDidUpdate() {
     this.logRef.current.scrollTop = this.logRef.current.scrollHeight;
     this.rxRef.current.scrollTop = this.rxRef.current.scrollHeight;
@@ -40,6 +44,11 @@ class MIDI extends React.Component {
     this.props.midiRx(`${type.name} received.`);
     var parsedData = type.parse(message.data);
     this.props.midiRx(parsedData || 'No behavior for this message type is implemented.');
+  }
+
+  requestConfig() {
+    this.props.midiInfo('Requesting config');
+    this.props.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x23, 0xF7]);
   }
 
   render() {
