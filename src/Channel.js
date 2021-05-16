@@ -4,6 +4,10 @@ import './Channel.css';
 
 class Channel extends React.Component {
 
+  updateVolume(e, volume) {
+    this.props.updateVolume(this.props.number, volume);
+  }
+
   render() {
     return (
       <div className="Channel">
@@ -16,6 +20,7 @@ class Channel extends React.Component {
             min={0}
             max={127}
             disabled={this.props.disable}
+            onChange={this.updateVolume.bind(this)}
           />
         </div>
         <div className="channel-name">

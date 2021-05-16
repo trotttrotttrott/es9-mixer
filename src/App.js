@@ -110,6 +110,13 @@ ES-9 MIDI output ID: ${this.es9.output.id}
     });
   }
 
+  updateVolume(mix, channel, volume) {
+    var mixes = this.state.mixes;
+    mixes[mix][channel - 1].volume = volume;
+    this.setMixes(mixes);
+    this.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x34, mix * 8 + (channel - 1), volume, 0xF7]);
+  }
+
   render() {
     if (this.state === null || this.state.midiSupport === null) {
       return (
@@ -142,6 +149,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             mixes={this.state.mixes}
             hideMixes={this.config.hideMixes}
             disableChannels={this.config.disableChannels}
+            updateVolume={this.updateVolume.bind(this)}
           />
         </>
       )

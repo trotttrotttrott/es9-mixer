@@ -5,6 +5,10 @@ import './Mix.css';
 
 class Mix extends React.Component {
 
+  updateVolume(channel, volume) {
+    this.props.updateVolume(this.props.number, channel, volume);
+  }
+
   render() {
 
     var channels = this.props.channels.map(function(e, i) {
@@ -13,6 +17,7 @@ class Mix extends React.Component {
           <Channel
             number={i + 1}
             volume={e.volume}
+            updateVolume={this.updateVolume.bind(this)}
             disable={this.props.disableChannels.includes(i + 1)}
           />
         </Grid>
