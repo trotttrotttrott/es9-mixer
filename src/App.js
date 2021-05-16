@@ -1,7 +1,7 @@
 import React from 'react';
 import Status from './Status';
 import MIDI from './MIDI/MIDI';
-import Mixes from './Mixes';
+import Mixes from './Mixes/Mixes';
 
 class App extends React.Component {
 
