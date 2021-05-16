@@ -42,8 +42,13 @@ class MIDI extends React.Component {
     this.props.midiInfo(`Received sysex (${message.data.length} bytes)`);
     var type = this.types[message.data[5]];
     this.props.midiRx(`${type.name} received.`);
-    var parsedData = type.parse(message.data);
-    this.props.midiRx(parsedData || 'No behavior for this message type is implemented.');
+    var instance = new type(message.data);
+    if (!!instance.output) {
+      this.props.midiRx(instance.output());
+    }
+    if (!!instance.mix) {
+      this.props.setMix(instance.mix);
+    }
   }
 
   requestConfig() {

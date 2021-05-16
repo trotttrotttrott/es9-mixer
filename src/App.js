@@ -58,7 +58,7 @@ ES-9 MIDI input ID: ${this.es9.input.id}
 ES-9 MIDI output ID: ${this.es9.output.id}
 
 `,
-      midiRx: 'Received Messages:\n',
+      midiRx: ''
     });
   }
 
@@ -79,6 +79,12 @@ ES-9 MIDI output ID: ${this.es9.output.id}
   midiRx(msg) {
     this.setState({
       midiRx: `${this.state.midiRx}${msg}\n`
+    });
+  }
+
+  setMix(mix) {
+    this.setState({
+      mix: mix
     });
   }
 
@@ -108,6 +114,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             midi={{ info: this.state.midiInfo, rx: this.state.midiRx }}
             midiInfo={this.midiInfo.bind(this)}
             midiRx={this.midiRx.bind(this)}
+            setMix={this.setMix.bind(this)}
           />
         </>
       )
