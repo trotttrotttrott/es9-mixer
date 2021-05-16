@@ -1,6 +1,7 @@
 import React from 'react';
 import Status from './Status';
 import MIDI from './MIDI/MIDI';
+import Mixes from './Mixes';
 
 class App extends React.Component {
 
@@ -82,9 +83,9 @@ ES-9 MIDI output ID: ${this.es9.output.id}
     });
   }
 
-  setMix(mix) {
+  setMixes(mixes) {
     this.setState({
-      mix: mix
+      mixes: mixes
     });
   }
 
@@ -114,7 +115,10 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             midi={{ info: this.state.midiInfo, rx: this.state.midiRx }}
             midiInfo={this.midiInfo.bind(this)}
             midiRx={this.midiRx.bind(this)}
-            setMix={this.setMix.bind(this)}
+            setMixes={this.setMixes.bind(this)}
+          />
+          <Mixes
+            mixes={this.state.mixes}
           />
         </>
       )

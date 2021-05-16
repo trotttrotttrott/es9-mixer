@@ -1,0 +1,10 @@
+.Mix {
+  padding: 10px;
+  margin: 10px 10px 10px;
+  border: 1px solid #333;
+  float: left;
+}
+
+.Mix .name {
+  padding: 10px 0 20px 0;
+}

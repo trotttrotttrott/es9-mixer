@@ -5,7 +5,7 @@ class ConfigDump {
   constructor(data) {
     // We're only concerned with mix data.
     var c = 75;
-    this.mix = Array(16).fill(0).map(function(_, mix) {
+    this.mixes = Array(16).fill(0).map(function(_, mix) {
       return Array(8).fill(0).map(function(_, channel) {
         var mix = {
           volume: data[c],

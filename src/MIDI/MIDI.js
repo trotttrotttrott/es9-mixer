@@ -46,8 +46,8 @@ class MIDI extends React.Component {
     if (!!instance.output) {
       this.props.midiRx(instance.output());
     }
-    if (!!instance.mix) {
-      this.props.setMix(instance.mix);
+    if (!!instance.mixes) {
+      this.props.setMixes(instance.mixes);
     }
   }
 
