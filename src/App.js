@@ -9,6 +9,16 @@ class App extends React.Component {
     super(props);
 
     this.es9 = {};
+
+    this.config = {
+      hideMixes: []
+    };
+
+    if (process.env.REACT_APP_HIDE_MIXES) {
+      this.config.hideMixes = process.env.REACT_APP_HIDE_MIXES.split(' ').map(function(element) {
+        return parseInt(element);
+      });
+    }
   }
 
   componentDidMount() {
@@ -119,6 +129,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
           />
           <Mixes
             mixes={this.state.mixes}
+            hideMixes={this.config.hideMixes}
           />
         </>
       )

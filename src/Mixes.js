@@ -6,14 +6,19 @@ class Mixes extends React.Component {
   render() {
 
     var mixes = this.props.mixes?.map(function(e, i) {
-      return (
-        <Mix
-          key={i}
-          number={i}
-          channels={e}
-        />
-      )
-    });
+
+      if (this.props.hideMixes.includes(i + 1)) {
+        return '';
+      } else {
+        return (
+          <Mix
+            key={i}
+            number={i}
+            channels={e}
+          />
+        )
+      }
+    }.bind(this));
 
     return (
       <div className="Mixes">
