@@ -1,8 +1,4 @@
-.Logs .buttons {
-  padding-bottom: 10px;
-}
-
-.Logs textarea {
+.MIDI textarea {
   width: 100%;
   resize: none;
   box-sizing: border-box;

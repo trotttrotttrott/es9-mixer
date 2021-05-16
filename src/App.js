@@ -1,5 +1,6 @@
 import React from 'react';
 import Status from './Status';
+import MIDI from './MIDI/MIDI';
 
 class App extends React.Component {
 
@@ -51,14 +52,13 @@ class App extends React.Component {
     this.setState({
       midiSupport: true,
       statusMessage: 'OK',
-      info: `This version is for ES-9 firmware v1.2.0 and above.
+      midiInfo: `This version is for ES-9 firmware v1.2.0 and above.
 
 ES-9 MIDI input ID: ${this.es9.input.id}
 ES-9 MIDI output ID: ${this.es9.output.id}
 
 `,
-      rx: 'Received Messages:\n',
-      tx: 'Transmitted Messages:\n'
+      midiRx: 'Received Messages:\n',
     });
   }
 
@@ -66,6 +66,19 @@ ES-9 MIDI output ID: ${this.es9.output.id}
     this.setState({
       midiSupport: false,
       statusMessage: msg
+    });
+  }
+
+  midiInfo(msg) {
+    var time = new Date().toLocaleTimeString();
+    this.setState({
+      midiInfo: `${this.state.midiInfo}${time}: ${msg}\n`
+    });
+  }
+
+  midiRx(msg) {
+    this.setState({
+      midiRx: `${this.state.midiRx}${msg}\n`
     });
   }
 
@@ -89,6 +102,12 @@ ES-9 MIDI output ID: ${this.es9.output.id}
           <Status
             midiSupport={this.state.midiSupport}
             message={this.state.statusMessage}
+          />
+          <MIDI
+            es9={this.es9}
+            midi={{ info: this.state.midiInfo, rx: this.state.midiRx }}
+            midiInfo={this.midiInfo.bind(this)}
+            midiRx={this.midiRx.bind(this)}
           />
         </>
       )
