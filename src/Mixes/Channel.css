@@ -11,6 +11,14 @@
   font-size: 75%;
 }
 
+.Channel .MuiButtonGroup-root .MuiButton-text {
+  padding: 6px 0;
+}
+
+.Channel .MuiButtonGroup-root .MuiButtonGroup-grouped {
+  min-width: 0;
+}
+
 .Channel .MuiSlider-root.MuiSlider-vertical {
   width: 0;
 }

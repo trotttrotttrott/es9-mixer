@@ -1,5 +1,9 @@
 import React from 'react';
-import { Slider } from '@material-ui/core';
+import {
+  Slider,
+  Button,
+  ButtonGroup
+} from '@material-ui/core';
 import './Channel.css';
 
 class Channel extends React.Component {
@@ -26,6 +30,20 @@ class Channel extends React.Component {
         <div className="channel-name">
           {this.props.number}
         </div>
+        {
+          !this.props.disable &&
+            <ButtonGroup
+              orientation="vertical"
+              color="secondary"
+              variant="text"
+            >
+              <Button onClick={this.updateVolume.bind(this, null, 127)}>.....</Button>
+              <Button onClick={this.updateVolume.bind(this, null, 96)}>....</Button>
+              <Button onClick={this.updateVolume.bind(this, null, 63)}>...</Button>
+              <Button onClick={this.updateVolume.bind(this, null, 31)}>..</Button>
+              <Button onClick={this.updateVolume.bind(this, null, 0)}>.</Button>
+            </ButtonGroup>
+        }
       </div>
     )
   }
