@@ -1,0 +1,37 @@
+kind: pipeline
+type: docker
+name: generate
+
+steps:
+
+- name: build
+  image: node:16.3.0-alpine3.13
+  commands:
+  - yarn install
+  - yarn build
+
+- name: push
+  image: alpine/git:v2.26.2
+  environment:
+    DEPLOY_KEY:
+      from_secret: github_deploy_key
+    GIT_COMMITTER_EMAIL: 69285523+bottbottbott@users.noreply.github.com
+    GIT_COMMITTER_NAME: bottbottbott
+  commands:
+  - git add -f .
+  - git commit -m '[drone] es9-mixer build'
+  - mkdir -p /root/.ssh
+  - echo "$DEPLOY_KEY" > /root/.ssh/id_rsa
+  - chmod 600 /root/.ssh/id_rsa
+  - touch /root/.ssh/known_hosts
+  - chmod 600 /root/.ssh/known_hosts
+  - ssh-keyscan -H github.com > /etc/ssh/ssh_known_hosts 2> /dev/null
+  - git push -f git@github.com:trotttrotttrott/es9-mixer HEAD:build
+
+trigger:
+  event:
+  - push
+  branch:
+  - master
+  repo:
+  - trotttrotttrott/es9-mixer
