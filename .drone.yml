@@ -18,7 +18,7 @@ steps:
     GIT_COMMITTER_EMAIL: 69285523+bottbottbott@users.noreply.github.com
     GIT_COMMITTER_NAME: bottbottbott
   commands:
-  - git add -f .
+  - git add -f build
   - git commit -m '[drone] es9-mixer build'
   - mkdir -p /root/.ssh
   - echo "$DEPLOY_KEY" > /root/.ssh/id_rsa
