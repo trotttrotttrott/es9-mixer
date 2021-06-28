@@ -5,14 +5,19 @@ class Status extends React.Component {
 
   render() {
     return (
-      <div className="Status">
-        <header>
-          <div>
-            <span>Web MIDI status: </span>
-            <span className={String(this.props.midiSupport)}>{this.props.message}</span>
+      <>
+        {
+          !this.props.midiSupport &&
+          <div className="Status">
+            <header>
+              <div>
+                <span>Web MIDI status: </span>
+                <span className={String(this.props.midiSupport)}>{this.props.message}</span>
+              </div>
+            </header>
           </div>
-        </header>
-      </div>
+        }
+      </>
     );
   }
 }
