@@ -32,6 +32,6 @@ trigger:
   event:
   - push
   branch:
-  - master
+  - main
   repo:
   - trotttrotttrott/es9-mixer
