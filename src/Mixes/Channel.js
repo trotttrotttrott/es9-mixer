@@ -9,7 +9,20 @@ import './Channel.css';
 class Channel extends React.Component {
 
   updateVolume(e, volume) {
+
+    console.log(this.props.volume)
+
     this.props.updateVolume(this.props.number, volume);
+  }
+
+  bumpVolume(e, amount) {
+    var volume = this.props.volume + amount;
+    if (volume > 127) {
+      volume = 127;
+    } else if (volume < 0) {
+      volume = 0;
+    }
+    this.updateVolume(e, volume);
   }
 
   render() {
@@ -32,17 +45,32 @@ class Channel extends React.Component {
         </div>
         {
           !this.props.disable &&
-            <ButtonGroup
-              orientation="vertical"
-              color="secondary"
-              variant="text"
-            >
-              <Button onClick={this.updateVolume.bind(this, null, 127)}>.....</Button>
-              <Button onClick={this.updateVolume.bind(this, null, 96)}>....</Button>
-              <Button onClick={this.updateVolume.bind(this, null, 63)}>...</Button>
-              <Button onClick={this.updateVolume.bind(this, null, 31)}>..</Button>
-              <Button onClick={this.updateVolume.bind(this, null, 0)}>.</Button>
-            </ButtonGroup>
+          <>
+            <div>
+              <ButtonGroup
+                orientation="vertical"
+                color="secondary"
+                variant="text"
+              >
+                <Button onClick={this.bumpVolume.bind(this, null, 5)}>+</Button>
+                <Button onClick={this.bumpVolume.bind(this, null, -5)}>-</Button>
+              </ButtonGroup>
+            </div>
+            <div>.</div>
+            <div>
+              <ButtonGroup
+                orientation="vertical"
+                color="secondary"
+                variant="text"
+              >
+                <Button onClick={this.updateVolume.bind(this, null, 127)}>.....</Button>
+                <Button onClick={this.updateVolume.bind(this, null, 96)}>....</Button>
+                <Button onClick={this.updateVolume.bind(this, null, 63)}>...</Button>
+                <Button onClick={this.updateVolume.bind(this, null, 31)}>..</Button>
+                <Button onClick={this.updateVolume.bind(this, null, 0)}>.</Button>
+              </ButtonGroup>
+            </div>
+          </>
         }
       </div>
     )
