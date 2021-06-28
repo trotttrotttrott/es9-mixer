@@ -9,9 +9,6 @@ import './Channel.css';
 class Channel extends React.Component {
 
   updateVolume(e, volume) {
-
-    console.log(this.props.volume)
-
     this.props.updateVolume(this.props.number, volume);
   }
 
