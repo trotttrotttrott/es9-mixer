@@ -8,7 +8,7 @@ Intended as an alternative the ES-9 config tool when you just want to mix.
 ## Firmware
 
 Requires firmware 1.2.0 or later which can be downloaded
-[here](https://modwiggler.com/forum/viewtopic.php?f=35&t=226245&start=225#p3413903).
+[here](https://www.expert-sleepers.co.uk/es9firmware.html).
 
 ## Configuration
 
