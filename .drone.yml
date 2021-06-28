@@ -6,6 +6,8 @@ steps:
 
 - name: build
   image: node:16.3.0-alpine3.13
+  environment:
+    PUBLIC_URL: https://trotttrotttrott.com/es9-mixer/build
   commands:
   - yarn install
   - yarn build
