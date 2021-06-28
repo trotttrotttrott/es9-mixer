@@ -64,8 +64,8 @@ class MIDI extends React.Component {
             readOnly
             ref={this.logRef}
             value={this.props.midi.info}
-            rowsMin={10}
-            rowsMax={10}
+            rowsMin={4}
+            rowsMax={4}
           />
         </Grid>
         <Grid item xs={6}>
@@ -73,8 +73,8 @@ class MIDI extends React.Component {
             readOnly
             ref={this.rxRef}
             value={this.props.midi.rx}
-            rowsMin={10}
-            rowsMax={10}
+            rowsMin={4}
+            rowsMax={4}
           />
         </Grid>
       </Grid>
