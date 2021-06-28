@@ -2,8 +2,13 @@ import React from 'react';
 import './MIDI.css'
 import {
   Grid,
-  TextareaAutosize
+  TextareaAutosize,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails
 } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
 import ConfigDump from './Message/ConfigDump'
 import MixDump from './Message/MixDump'
@@ -58,26 +63,36 @@ class MIDI extends React.Component {
 
   render() {
     return (
-      <Grid container spacing={1} className="MIDI">
-        <Grid item xs={6}>
-          <TextareaAutosize
-            readOnly
-            ref={this.logRef}
-            value={this.props.midi.info}
-            rowsMin={4}
-            rowsMax={4}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextareaAutosize
-            readOnly
-            ref={this.rxRef}
-            value={this.props.midi.rx}
-            rowsMin={4}
-            rowsMax={4}
-          />
-        </Grid>
-      </Grid>
+      <Accordion className="MIDI">
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon color='secondary' />}
+        >
+          <FormatListBulletedIcon />
+          <span>MIDI Activity</span>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Grid container spacing={1}>
+            <Grid item xs={6}>
+              <TextareaAutosize
+                readOnly
+                ref={this.logRef}
+                value={this.props.midi.info}
+                rowsMin={10}
+                rowsMax={10}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextareaAutosize
+                readOnly
+                ref={this.rxRef}
+                value={this.props.midi.rx}
+                rowsMin={10}
+                rowsMax={10}
+              />
+            </Grid>
+          </Grid>
+        </AccordionDetails>
+      </Accordion>
     )
   }
 }
