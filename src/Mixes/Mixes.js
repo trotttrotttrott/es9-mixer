@@ -9,7 +9,9 @@ class Mixes extends React.Component {
 
     var mixes = this.props.mixes?.map(function(e, i) {
       return (
-        <Grid item key={i} xs={3}>
+        <Grid item key={i} xs={3}
+           style={{ display: this.props.settings.showMixes[i] ? 'block' : 'none' }}
+        >
           <Mix
             number={i}
             channels={e}

@@ -10,6 +10,17 @@ class App extends React.Component {
     super(props);
 
     this.es9 = {};
+
+    var settings = JSON.parse(window.localStorage.getItem('settings'));
+    if (settings == null) {
+      settings = {
+        showMixes: Array(16).fill(true) // show all mixes by default
+      }
+      window.localStorage.setItem('settings', JSON.stringify(settings));
+    }
+    this.state = {
+      settings: settings
+    };
   }
 
   componentDidMount() {
@@ -71,6 +82,17 @@ ES-9 MIDI output ID: ${this.es9.output.id}
     });
   }
 
+  // Settings functions
+
+  showMix(mix, show) {
+    var settings = JSON.parse(window.localStorage.getItem('settings'));
+    settings.showMixes[mix] = show;
+    window.localStorage.setItem('settings', JSON.stringify(settings));
+    this.setState({ settings: settings });
+  }
+
+  // MIDI functions
+
   midiInfo(msg) {
     var time = new Date().toLocaleTimeString();
     this.setState({
@@ -119,6 +141,9 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             message={this.state.statusMessage}
           />
           <Settings
+            mixes={this.state.mixes}
+            settings={this.state.settings}
+            showMix={this.showMix.bind(this)}
           />
           <MIDI
             es9={this.es9}
@@ -129,6 +154,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
           />
           <Mixes
             mixes={this.state.mixes}
+            settings={this.state.settings}
             updateVolume={this.updateVolume.bind(this)}
           />
         </>

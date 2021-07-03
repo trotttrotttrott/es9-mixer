@@ -1,4 +1,5 @@
 import React from 'react';
+import ShowMixes from './Setting/ShowMixes';
 import './Settings.css'
 import {
   Accordion,
@@ -20,6 +21,11 @@ class Settings extends React.Component {
           <span>Settings</span>
         </AccordionSummary>
         <AccordionDetails>
+          <ShowMixes
+            mixes={this.props.mixes}
+            showMixes={this.props.settings?.showMixes}
+            showMix={this.props.showMix}
+          />
         </AccordionDetails>
       </Accordion>
     )
