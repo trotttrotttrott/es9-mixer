@@ -1,5 +1,6 @@
 import React from 'react';
 import Status from './Status';
+import Settings from './Settings/Settings';
 import MIDI from './MIDI/MIDI';
 import Mixes from './Mixes/Mixes';
 
@@ -116,6 +117,8 @@ ES-9 MIDI output ID: ${this.es9.output.id}
           <Status
             midiSupport={this.state.midiSupport}
             message={this.state.statusMessage}
+          />
+          <Settings
           />
           <MIDI
             es9={this.es9}

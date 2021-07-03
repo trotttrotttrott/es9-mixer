@@ -1,0 +1,9 @@
+.Settings {
+  background-color: #101010 !important;
+  color: inherit !important;
+}
+
+.Settings .MuiAccordionSummary-content span {
+  margin-left: 10px;
+  line-height: 24px;
+}
