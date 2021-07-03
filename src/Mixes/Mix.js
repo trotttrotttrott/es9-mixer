@@ -18,7 +18,6 @@ class Mix extends React.Component {
             number={i + 1}
             volume={e.volume}
             updateVolume={this.updateVolume.bind(this)}
-            disable={this.props.disableChannels.includes(i + 1)}
           />
         </Grid>
       );

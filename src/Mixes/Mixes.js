@@ -8,21 +8,15 @@ class Mixes extends React.Component {
   render() {
 
     var mixes = this.props.mixes?.map(function(e, i) {
-
-      if (this.props.hideMixes.includes(i + 1)) {
-        return '';
-      } else {
-        return (
-          <Grid item key={i} xs={3}>
-            <Mix
-              number={i}
-              channels={e}
-              disableChannels={this.props.disableChannels[i + 1] || []}
-              updateVolume={this.props.updateVolume}
-            />
-          </Grid>
-        )
-      }
+      return (
+        <Grid item key={i} xs={3}>
+          <Mix
+            number={i}
+            channels={e}
+            updateVolume={this.props.updateVolume}
+          />
+        </Grid>
+      )
     }.bind(this));
 
     return (

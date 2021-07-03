@@ -9,27 +9,6 @@ class App extends React.Component {
     super(props);
 
     this.es9 = {};
-
-    this.config = {
-      hideMixes: [],
-      disableChannels: []
-    };
-
-    if (process.env.REACT_APP_HIDE_MIXES) {
-      this.config.hideMixes = process.env.REACT_APP_HIDE_MIXES.split(' ').map(function(element) {
-        return parseInt(element);
-      });
-    }
-
-    if (process.env.REACT_APP_DISABLE_CHANNELS) {
-      process.env.REACT_APP_DISABLE_CHANNELS.split(' ').forEach(function(element) {
-        var [mix, channel] = element.split(':');
-        if (!this.config.disableChannels[mix]) {
-          this.config.disableChannels[mix] = [];
-        }
-        this.config.disableChannels[mix].push(parseInt(channel));
-      }.bind(this));
-    }
   }
 
   componentDidMount() {
@@ -147,8 +126,6 @@ ES-9 MIDI output ID: ${this.es9.output.id}
           />
           <Mixes
             mixes={this.state.mixes}
-            hideMixes={this.config.hideMixes}
-            disableChannels={this.config.disableChannels}
             updateVolume={this.updateVolume.bind(this)}
           />
         </>
