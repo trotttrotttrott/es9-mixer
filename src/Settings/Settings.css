@@ -3,11 +3,17 @@
   color: inherit !important;
 }
 
+.Settings .section {
+  font-size: 90%;
+}
+
 .Settings .MuiAccordionSummary-content span {
   margin-left: 10px;
   line-height: 24px;
 }
 
-.Settings .MuiCheckbox-root {
+.Settings .MuiCheckbox-root,
+.Settings .MuiCheckbox-root.Mui-disabled,
+.Settings .MuiFormControlLabel-label.Mui-disabled {
   color: #666;
 }

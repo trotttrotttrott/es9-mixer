@@ -119,6 +119,12 @@ ES-9 MIDI output ID: ${this.es9.output.id}
     this.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x34, mix * 8 + (channel - 1), volume, 0xF7]);
   }
 
+  setStereoLinks(stereoLinks) {
+    this.setState({
+      stereoLinks: stereoLinks
+    });
+  }
+
   render() {
     if (this.state === null || this.state.midiSupport === null) {
       return (
@@ -144,6 +150,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             mixes={this.state.mixes}
             settings={this.state.settings}
             showMix={this.showMix.bind(this)}
+            stereoLinks={this.state.stereoLinks}
           />
           <MIDI
             es9={this.es9}
@@ -151,6 +158,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             midiInfo={this.midiInfo.bind(this)}
             midiRx={this.midiRx.bind(this)}
             setMixes={this.setMixes.bind(this)}
+            setStereoLinks={this.setStereoLinks.bind(this)}
           />
           <Mixes
             mixes={this.state.mixes}

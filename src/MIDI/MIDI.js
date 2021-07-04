@@ -55,6 +55,9 @@ class MIDI extends React.Component {
     if (!!instance.mixes) {
       this.props.setMixes(instance.mixes);
     }
+    if (!!instance.stereoLinks) {
+      this.props.setStereoLinks(instance.stereoLinks);
+    }
   }
 
   requestConfig() {

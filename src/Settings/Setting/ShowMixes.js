@@ -4,7 +4,6 @@ import {
   FormControlLabel,
   Checkbox
 } from '@material-ui/core';
-import './ShowMixes.css';
 
 class ShowMixes extends React.Component {
 
@@ -31,8 +30,8 @@ class ShowMixes extends React.Component {
 
     return (
       <div className="ShowMixes">
+        <div className="section">Show Mixes:</div>
         <FormGroup row>
-          <div className="section">Show Mixes:</div>
           {mixes}
         </FormGroup>
       </div>

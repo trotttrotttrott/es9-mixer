@@ -1,10 +1,12 @@
 import React from 'react';
 import ShowMixes from './Setting/ShowMixes';
+import StereoLinks from './Setting/StereoLinks';
 import './Settings.css'
 import {
   Accordion,
   AccordionSummary,
-  AccordionDetails
+  AccordionDetails,
+  Grid
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -21,11 +23,20 @@ class Settings extends React.Component {
           <span>Settings</span>
         </AccordionSummary>
         <AccordionDetails>
-          <ShowMixes
-            mixes={this.props.mixes}
-            showMixes={this.props.settings?.showMixes}
-            showMix={this.props.showMix}
-          />
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <ShowMixes
+                mixes={this.props.mixes}
+                showMixes={this.props.settings?.showMixes}
+                showMix={this.props.showMix}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <StereoLinks
+                stereoLinks={this.props.stereoLinks}
+              />
+            </Grid>
+          </Grid>
         </AccordionDetails>
       </Accordion>
     )
