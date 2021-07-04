@@ -35,6 +35,7 @@ class MIDI extends React.Component {
   }
 
   componentDidMount() {
+    this.requestConfig();
     this.requestMix();
   }
 
@@ -54,6 +55,11 @@ class MIDI extends React.Component {
     if (!!instance.mixes) {
       this.props.setMixes(instance.mixes);
     }
+  }
+
+  requestConfig() {
+    this.props.midiInfo('Requesting config');
+    this.props.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x23, 0xF7]);
   }
 
   requestMix() {
