@@ -2,6 +2,8 @@ class MixDump {
 
   static id = 0x11;
 
+  static type = 'MixDump';
+
   constructor(data) {
     var c = 390;
     this.mixes = Array(16).fill(0).map(function(_, mix) {

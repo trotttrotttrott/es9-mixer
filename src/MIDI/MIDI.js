@@ -46,7 +46,7 @@ class MIDI extends React.Component {
   onMIDIMessage(message) {
     this.props.midiInfo(`Received sysex (${message.data.length} bytes)`);
     var type = this.types[message.data[5]];
-    this.props.midiRx(`${type.name} received.`);
+    this.props.midiRx(`${type.type} received.`);
     var instance = new type(message.data);
     if (!!instance.output) {
       this.props.midiRx(instance.output());
