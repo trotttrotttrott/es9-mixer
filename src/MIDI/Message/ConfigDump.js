@@ -5,11 +5,37 @@ class ConfigDump {
   static type = 'ConfigDump';
 
   constructor(data) {
+    this.routeIn(data.slice(8, -1));
     this.stereoLinks(data.slice(459, 459+31));
+  }
+
+  routeIn(data) {
+
+    const inputCaptureLookup = [0x78, 0x79, 0x76, 0x75, 0x74, 0x7b, 0x7a, 0x77, 0x73, 0x72, 0x7d, 0x7c, 0x7e, 0x7f];
+
+    var routeIn = [];
+
+    var dsp, ch;
+    for ( dsp=0; dsp<4; ++dsp ) {
+      for ( ch=0; ch<8; ++ch ) {
+        var v = data[2+dsp*8+ch];
+        if ( ( v >> 4 ) === 7 ) {
+          v = 0x70 + inputCaptureLookup.indexOf( v );
+        }
+        routeIn.push(v);
+      }
+    }
+    this.routeIn = {
+      usb: routeIn.slice(0, 16),
+      mix: routeIn.slice(16, 32)
+    };
   }
 
   stereoLinks(data) {
 
+    // 0-6, 8-15, etc. correspond to the link numbers that can be used to
+    // update stereo links. They're not relevant at this time since we don't
+    // attempt to manage them.
     var input = []; // 0-6
     var bus = []; // 8-15
     var usb = []; // 16-23

@@ -14,6 +14,7 @@
 
 .Settings .MuiCheckbox-root,
 .Settings .MuiCheckbox-root.Mui-disabled,
-.Settings .MuiFormControlLabel-label.Mui-disabled {
+.Settings .MuiFormControlLabel-label.Mui-disabled,
+.Settings .MuiTableCell-root {
   color: #666;
 }
