@@ -8,6 +8,12 @@ class Mixes extends React.Component {
   render() {
 
     var mixes = this.props.mixes?.map(function(e, i) {
+
+      var linked = false;
+      if (i % 2 === 0) {
+        linked = !!this.props.stereoLinks?.mix[i/2];
+      }
+
       return (
         <Grid item key={i}
            style={{ display: this.props.settings.showMixes[i] ? 'block' : 'none' }}
@@ -19,6 +25,7 @@ class Mixes extends React.Component {
             stereoLinks={this.props.stereoLinks}
             routeIn={this.props.routeIn}
             routeOut={this.props.routeOut}
+            linked={linked}
           />
         </Grid>
       )

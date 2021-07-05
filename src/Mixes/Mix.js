@@ -41,15 +41,21 @@ class Mix extends React.Component {
       );
     }.bind(this));
 
-    var output = this.props.routeOut?.mix[this.props.number];
-    var routeOut = ES9Static.routeOut[output];
+    var output1 = this.props.routeOut?.mix[this.props.number];
+    var routeOut1 = ES9Static.routeOut[output1];
+    var outputName = routeOut1.name
+    if (this.props.linked) {
+      var output2 = this.props.routeOut?.mix[this.props.number+1];
+      var routeOut2 = ES9Static.routeOut[output2];
+      outputName = `${routeOut1.name} / ${routeOut2.name}`
+    }
 
     return (
       <div className="Mix">
         <div className="name">
           <span>Mix {this.props.number + 1}</span>
           <span>.</span>
-          <span>{routeOut.name}</span>
+          <span>{outputName}</span>
         </div>
         <Grid container spacing={2}>
           {channels}
