@@ -16,6 +16,8 @@ class Mixes extends React.Component {
             number={i}
             channels={e}
             updateVolume={this.props.updateVolume}
+            stereoLinks={this.props.stereoLinks}
+            routeIn={this.props.routeIn}
           />
         </Grid>
       )

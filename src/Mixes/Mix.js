@@ -1,4 +1,5 @@
 import React from 'react';
+import ES9Static from '../ES9Static';
 import { Grid } from '@material-ui/core';
 import Channel from './Channel';
 import './Mix.css';
@@ -12,10 +13,20 @@ class Mix extends React.Component {
   render() {
 
     var channels = this.props.channels.map(function(e, i) {
+
+      var input = this.props.routeIn?.mix[i];
+      var routeIn = ES9Static.routeIn[input];
+      var linked = this.props.stereoLinks[routeIn.type][routeIn.linkIndex];
+
+      if (linked && i % 2 === 1) {
+        return
+      }
+
       return (
         <Grid item key={i + 1}>
           <Channel
-            number={i + 1}
+            name={linked ? `${i+1}/${i+2}` : i+1}
+            number={i+1}
             volume={e.volume}
             updateVolume={this.updateVolume.bind(this)}
           />

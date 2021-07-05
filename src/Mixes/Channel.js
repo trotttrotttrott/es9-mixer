@@ -38,7 +38,7 @@ class Channel extends React.Component {
           />
         </div>
         <div className="channel-name">
-          {this.props.number}
+          {this.props.name}
         </div>
         {
           !this.props.disable &&
