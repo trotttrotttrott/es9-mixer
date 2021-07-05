@@ -112,6 +112,16 @@ ES-9 MIDI output ID: ${this.es9.output.id}
     });
   }
 
+  requestConfig() {
+    this.midiInfo('Requesting config');
+    this.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x23, 0xF7]);
+  }
+
+  requestMix() {
+    this.midiInfo('Requesting mix');
+    this.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x2A, 0xF7]);
+  }
+
   updateVolume(mix, channel, volume) {
     var mixes = this.state.mixes;
     mixes[mix][channel - 1].volume = volume;
@@ -165,6 +175,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             stereoLinks={this.state.stereoLinks}
             routeIn={this.state.routeIn}
             routeOut={this.state.routeOut}
+            requestConfig={this.requestConfig.bind(this)}
           />
           <MIDI
             es9={this.es9}
@@ -175,6 +186,8 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             setStereoLinks={this.setStereoLinks.bind(this)}
             setRouteIn={this.setRouteIn.bind(this)}
             setRouteOut={this.setRouteOut.bind(this)}
+            requestConfig={this.requestConfig.bind(this)}
+            requestMix={this.requestMix.bind(this)}
           />
           <Mixes
             mixes={this.state.mixes}

@@ -12,6 +12,7 @@
   line-height: 24px;
 }
 
+.Settings p,
 .Settings .MuiCheckbox-root,
 .Settings .MuiCheckbox-root.Mui-disabled,
 .Settings .MuiFormControlLabel-label.Mui-disabled,
@@ -19,6 +20,7 @@
   color: #666;
 }
 
+.Settings p,
 .Settings td.MuiTableCell-body {
   font-size: 75%;
 }

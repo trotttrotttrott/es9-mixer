@@ -2,6 +2,7 @@ import React from 'react';
 import ShowMixes from './Setting/ShowMixes';
 import StereoLinks from './Setting/StereoLinks';
 import Routing from './Setting/Routing';
+import Sync from './Setting/Sync';
 import './Settings.css'
 import {
   Accordion,
@@ -41,6 +42,11 @@ class Settings extends React.Component {
               <Routing
                 routeIn={this.props.routeIn}
                 routeOut={this.props.routeOut}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Sync
+                requestConfig={this.props.requestConfig}
               />
             </Grid>
           </Grid>
