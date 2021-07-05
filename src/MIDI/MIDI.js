@@ -36,6 +36,7 @@ class MIDI extends React.Component {
 
   componentDidMount() {
     this.props.requestConfig();
+    this.props.requestMix();
   }
 
   componentDidUpdate() {
