@@ -28,7 +28,7 @@ class StereoLinks extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {Object.keys(this.props.stereoLinks).map((group) => (
+              {Object.keys(this.props.stereoLinks || []).map((group) => (
                 <TableRow>
                   <TableCell component="th">{group}:</TableCell>
                   {this.props.stereoLinks[group].map((e) => (
