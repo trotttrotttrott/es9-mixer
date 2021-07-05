@@ -21,21 +21,21 @@ class Routing extends React.Component {
               <TableRow>
                 <TableCell></TableCell>
                 {[...Array(16).keys()].map((i) => (
-                  <TableCell align="center">{i+1}</TableCell>
+                  <TableCell key={i} align="center">{i+1}</TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
                 <TableCell component="th">IN:</TableCell>
-                {this.props.routeIn?.mix.map((e) => (
-                  <TableCell align="center">{ES9Static.routeIn[e].name}</TableCell>
+                {this.props.routeIn?.mix.map((e, i) => (
+                  <TableCell key={i} align="center">{ES9Static.routeIn[e].name}</TableCell>
                 ))}
               </TableRow>
               <TableRow>
                 <TableCell component="th">OUT:</TableCell>
-                {this.props.routeOut?.mix.map((e) => (
-                  <TableCell align="center">{ES9Static.routeOut[e].name}</TableCell>
+                {this.props.routeOut?.mix.map((e, i) => (
+                  <TableCell key={i} align="center">{ES9Static.routeOut[e].name}</TableCell>
                 ))}
               </TableRow>
             </TableBody>
