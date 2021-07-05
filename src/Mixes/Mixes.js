@@ -9,9 +9,15 @@ class Mixes extends React.Component {
 
     var mixes = this.props.mixes?.map(function(e, i) {
 
-      var linked = false;
-      if (i % 2 === 0) {
-        linked = !!this.props.stereoLinks?.mix[i/2];
+      var primaryLink = false;
+      var secondaryLink = false;
+      if (i % 2 === 0 && !!this.props.stereoLinks?.mix[i/2]) {
+        // Mix is stereo linked...
+        primaryLink = true;
+      } else if (!!this.props.stereoLinks?.mix[(i-1)/2]) {
+        // The previous mix is stereo linked so this one is a part of it.
+        // ES-9 ignores messages for this mix.
+        secondaryLink = true;
       }
 
       if (this.props.settings.showMixes[i]) {
@@ -24,7 +30,8 @@ class Mixes extends React.Component {
               stereoLinks={this.props.stereoLinks}
               routeIn={this.props.routeIn}
               routeOut={this.props.routeOut}
-              linked={linked}
+              primaryLink={primaryLink}
+              secondaryLink={secondaryLink}
             />
           </Grid>
         )

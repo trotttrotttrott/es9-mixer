@@ -36,18 +36,22 @@ class Mix extends React.Component {
             number={i+1}
             volume={e.volume}
             updateVolume={this.updateVolume.bind(this)}
+            disable={this.props.secondaryLink}
           />
         </Grid>
       );
     }.bind(this));
 
-    var output1 = this.props.routeOut?.mix[this.props.number];
-    var routeOut1 = ES9Static.routeOut[output1];
-    var outputName = routeOut1.name
-    if (this.props.linked) {
-      var output2 = this.props.routeOut?.mix[this.props.number+1];
-      var routeOut2 = ES9Static.routeOut[output2];
-      outputName = `${routeOut1.name} / ${routeOut2.name}`
+    var outputName = `(controlled by mix ${this.props.number})`;
+    if (!this.props.secondaryLink) {
+      var output1 = this.props.routeOut?.mix[this.props.number];
+      var routeOut1 = ES9Static.routeOut[output1];
+      outputName = routeOut1.name
+      if (this.props.primaryLink) {
+        var output2 = this.props.routeOut?.mix[this.props.number+1];
+        var routeOut2 = ES9Static.routeOut[output2];
+        outputName = `${routeOut1.name} / ${routeOut2.name}`
+      }
     }
 
     return (
