@@ -14,21 +14,21 @@ class Mixes extends React.Component {
         linked = !!this.props.stereoLinks?.mix[i/2];
       }
 
-      return (
-        <Grid item key={i}
-           style={{ display: this.props.settings.showMixes[i] ? 'block' : 'none' }}
-        >
-          <Mix
-            number={i}
-            channels={e}
-            updateVolume={this.props.updateVolume}
-            stereoLinks={this.props.stereoLinks}
-            routeIn={this.props.routeIn}
-            routeOut={this.props.routeOut}
-            linked={linked}
-          />
-        </Grid>
-      )
+      if (this.props.settings.showMixes[i]) {
+        return (
+          <Grid item key={i}>
+            <Mix
+              number={i}
+              channels={e}
+              updateVolume={this.props.updateVolume}
+              stereoLinks={this.props.stereoLinks}
+              routeIn={this.props.routeIn}
+              routeOut={this.props.routeOut}
+              linked={linked}
+            />
+          </Grid>
+        )
+      }
     }.bind(this));
 
     return (
