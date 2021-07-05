@@ -60,10 +60,9 @@ class Channel extends React.Component {
                 color="secondary"
                 variant="text"
               >
-                <Button onClick={this.updateVolume.bind(this, null, 127)}>.....</Button>
-                <Button onClick={this.updateVolume.bind(this, null, 96)}>....</Button>
-                <Button onClick={this.updateVolume.bind(this, null, 63)}>...</Button>
-                <Button onClick={this.updateVolume.bind(this, null, 31)}>..</Button>
+                <Button onClick={this.updateVolume.bind(this, null, 127)}>....</Button>
+                <Button onClick={this.updateVolume.bind(this, null, 103)}>...</Button>
+                <Button onClick={this.updateVolume.bind(this, null, 51)}>..</Button>
                 <Button onClick={this.updateVolume.bind(this, null, 0)}>.</Button>
               </ButtonGroup>
             </div>
