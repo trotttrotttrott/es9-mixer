@@ -24,3 +24,7 @@
 .Settings td.MuiTableCell-body {
   font-size: 75%;
 }
+
+.Settings th.MuiTableCell-body {
+  text-transform: uppercase;
+}

@@ -1,53 +1,51 @@
 import React from 'react';
 import {
-  FormGroup,
-  FormControlLabel,
   Checkbox,
-  Grid
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell
 } from '@material-ui/core';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 class StereoLinks extends React.Component {
 
   render() {
-
-    var stereoLinks = {};
-
-    for (var group in this.props.stereoLinks) {
-      stereoLinks[group] = this.props.stereoLinks[group].map(function(e, i) {
-        return (
-          <FormControlLabel
-            key={i}
-            control={
-              <Checkbox
-                checked={!!e}
-                disabled
-              />
-            }
-            label={`${i*2+1}/${i*2+2}`}
-          />
-        )
-      });
-    };
-
-    return (
+    return(
       <div className="StereoLinks">
         <div className="section">Stereo Links:</div>
-        <FormGroup row>
-          <Grid container>
-            <Grid item xs={12}>
-              {stereoLinks.input}
-            </Grid>
-            <Grid item xs={12}>
-              {stereoLinks.bus}
-            </Grid>
-            <Grid item xs={12}>
-              {stereoLinks.usb}
-            </Grid>
-            <Grid item xs={12}>
-              {stereoLinks.mix}
-            </Grid>
-          </Grid>
-        </FormGroup>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell></TableCell>
+                {[...Array(8).keys()].map((i) => (
+                  <TableCell align="center">{`${i*2+1}/${i*2+2}`}</TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {Object.keys(this.props.stereoLinks).map((group) => (
+                <TableRow>
+                  <TableCell component="th">{group}:</TableCell>
+                  {this.props.stereoLinks[group].map((e) => (
+                    <TableCell align="center">
+                      <Checkbox
+                        checked={!!e}
+                        disabled
+                        icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                        checkedIcon={<CheckBoxIcon fontSize="small" />}
+                      />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     )
   }
