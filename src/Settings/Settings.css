@@ -18,3 +18,7 @@
 .Settings .MuiTableCell-root {
   color: #666;
 }
+
+.Settings td.MuiTableCell-body {
+  font-size: 75%;
+}

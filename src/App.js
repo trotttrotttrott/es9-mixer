@@ -131,6 +131,12 @@ ES-9 MIDI output ID: ${this.es9.output.id}
     });
   }
 
+  setRouteOut(routeOut) {
+    this.setState({
+      routeOut: routeOut
+    });
+  }
+
   render() {
     if (this.state === null || this.state.midiSupport === null) {
       return (
@@ -158,6 +164,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             showMix={this.showMix.bind(this)}
             stereoLinks={this.state.stereoLinks}
             routeIn={this.state.routeIn}
+            routeOut={this.state.routeOut}
           />
           <MIDI
             es9={this.es9}
@@ -167,6 +174,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             setMixes={this.setMixes.bind(this)}
             setStereoLinks={this.setStereoLinks.bind(this)}
             setRouteIn={this.setRouteIn.bind(this)}
+            setRouteOut={this.setRouteOut.bind(this)}
           />
           <Mixes
             mixes={this.state.mixes}

@@ -40,6 +40,7 @@ class Settings extends React.Component {
             <Grid item xs={12}>
               <Routing
                 routeIn={this.props.routeIn}
+                routeOut={this.props.routeOut}
               />
             </Grid>
           </Grid>

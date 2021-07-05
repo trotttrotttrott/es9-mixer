@@ -27,9 +27,15 @@ class Routing extends React.Component {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>IN:</TableCell>
+                <TableCell component="th">IN:</TableCell>
                 {this.props.routeIn?.mix.map((e) => (
                   <TableCell align="center">{ES9Static.routeIn[e].name}</TableCell>
+                ))}
+              </TableRow>
+              <TableRow>
+                <TableCell component="th">OUT:</TableCell>
+                {this.props.routeOut?.mix.map((e) => (
+                  <TableCell align="center">{ES9Static.routeOut[e].name}</TableCell>
                 ))}
               </TableRow>
             </TableBody>

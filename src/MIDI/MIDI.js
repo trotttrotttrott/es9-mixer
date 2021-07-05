@@ -61,6 +61,9 @@ class MIDI extends React.Component {
     if (!!instance.routeIn) {
       this.props.setRouteIn(instance.routeIn);
     }
+    if (!!instance.routeOut) {
+      this.props.setRouteOut(instance.routeOut);
+    }
   }
 
   requestConfig() {

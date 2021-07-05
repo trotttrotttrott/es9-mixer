@@ -6,6 +6,7 @@ class ConfigDump {
 
   constructor(data) {
     this.routeIn(data.slice(8, -1));
+    this.routeOut(data.slice(8, -1));
     this.stereoLinks(data.slice(459, 459+31));
   }
 
@@ -28,6 +29,22 @@ class ConfigDump {
     this.routeIn = {
       usb: routeIn.slice(0, 16),
       mix: routeIn.slice(16, 32)
+    };
+  }
+
+  routeOut(data) {
+
+    var routeOut = [];
+
+    var dsp, ch;
+    for ( dsp=0; dsp<4; ++dsp ) {
+      for ( ch=0; ch<8; ++ch ) {
+        routeOut.push(data[2+32+dsp*8+ch]);
+      }
+    }
+    this.routeOut = {
+      usb: routeOut.slice(0, 16),
+      mix: routeOut.slice(16, 32)
     };
   }
 

@@ -170,6 +170,99 @@ class ES9Static {
       name: 'Input 14',
     },
   };
+
+  static routeOut = {
+    2: {
+      name: 'Output 5',
+    },
+    3: {
+      name: 'Output 6',
+    },
+    4: {
+      name: 'Output 3',
+    },
+    5: {
+      name: 'Output 4',
+    },
+    6: {
+      name: 'Main Out L',
+    },
+    7: {
+      name: 'Main Out R',
+    },
+    8: {
+      name: 'Output 1',
+    },
+    9: {
+      name: 'Output 2',
+    },
+    10: {
+      name: 'Output 8',
+    },
+    11: {
+      name: 'Output 7',
+    },
+    12: {
+      name: 'Phones L',
+    },
+    13: {
+      name: 'Phones R',
+    },
+    14: {
+      name: 'ES-5 L',
+    },
+    15: {
+      name: 'ES-5 R',
+    },
+    16: {
+      name: 'Bus 1',
+    },
+    17: {
+      name: 'Bus 2',
+    },
+    18: {
+      name: 'Bus 3',
+    },
+    19: {
+      name: 'Bus 4',
+    },
+    20: {
+      name: 'Bus 5',
+    },
+    21: {
+      name: 'Bus 6',
+    },
+    22: {
+      name: 'Bus 7',
+    },
+    23: {
+      name: 'Bus 8',
+    },
+    24: {
+      name: 'Bus 9',
+    },
+    25: {
+      name: 'Bus 10',
+    },
+    26: {
+      name: 'Bus 11',
+    },
+    27: {
+      name: 'Bus 12',
+    },
+    28: {
+      name: 'Bus 13',
+    },
+    29: {
+      name: 'Bus 14',
+    },
+    30: {
+      name: 'Bus 15',
+    },
+    31: {
+      name: 'Bus 16',
+    },
+  };
 }
 
 export default ES9Static;
