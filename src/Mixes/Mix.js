@@ -14,7 +14,14 @@ class Mix extends React.Component {
 
     var channels = this.props.channels.map(function(e, i) {
 
-      var input = this.props.routeIn?.mix[i];
+      var routeIndex;
+      if (this.props.number < 8) {
+        routeIndex = i;
+      } else {
+        routeIndex = i + 8;
+      }
+
+      var input = this.props.routeIn?.mix[routeIndex];
       var routeIn = ES9Static.routeIn[input];
       var linked = this.props.stereoLinks[routeIn.type][routeIn.linkIndex];
 
