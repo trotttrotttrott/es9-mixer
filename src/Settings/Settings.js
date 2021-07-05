@@ -1,7 +1,7 @@
 import React from 'react';
 import ShowMixes from './Setting/ShowMixes';
-import StereoLinks from './Setting/StereoLinks';
 import Routing from './Setting/Routing';
+import StereoLinks from './Setting/StereoLinks';
 import Sync from './Setting/Sync';
 import './Settings.css'
 import {
@@ -34,14 +34,14 @@ class Settings extends React.Component {
               />
             </Grid>
             <Grid item xs={12}>
-              <StereoLinks
-                stereoLinks={this.props.stereoLinks}
-              />
-            </Grid>
-            <Grid item xs={12}>
               <Routing
                 routeIn={this.props.routeIn}
                 routeOut={this.props.routeOut}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <StereoLinks
+                stereoLinks={this.props.stereoLinks}
               />
             </Grid>
             <Grid item xs={12}>
