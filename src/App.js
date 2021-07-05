@@ -195,6 +195,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             updateVolume={this.updateVolume.bind(this)}
             stereoLinks={this.state.stereoLinks}
             routeIn={this.state.routeIn}
+            routeOut={this.state.routeOut}
           />
         </>
       )

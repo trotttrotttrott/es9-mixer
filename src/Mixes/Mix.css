@@ -5,4 +5,16 @@
 
 .Mix .name {
   padding: 10px 0 20px 0;
+  font-size: 90%;
+}
+
+.Mix .name span {
+  padding: 0 10px;
+  color: #666;
+  font-size: 80%;
+}
+
+.Mix .name span:first-child {
+  color: inherit;
+  font-size: inherit;
 }

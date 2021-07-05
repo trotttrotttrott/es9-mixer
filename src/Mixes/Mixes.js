@@ -18,6 +18,7 @@ class Mixes extends React.Component {
             updateVolume={this.props.updateVolume}
             stereoLinks={this.props.stereoLinks}
             routeIn={this.props.routeIn}
+            routeOut={this.props.routeOut}
           />
         </Grid>
       )
