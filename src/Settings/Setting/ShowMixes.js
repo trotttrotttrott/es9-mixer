@@ -4,6 +4,8 @@ import {
   FormControlLabel,
   Checkbox
 } from '@material-ui/core';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 class ShowMixes extends React.Component {
 
@@ -21,6 +23,8 @@ class ShowMixes extends React.Component {
             <Checkbox
               checked={this.props.showMixes[i]}
               onChange={this.showMix.bind(this, i)}
+              icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+              checkedIcon={<CheckBoxIcon fontSize="small" />}
             />
           }
           label={i+1}

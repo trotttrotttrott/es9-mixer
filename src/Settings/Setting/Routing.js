@@ -16,7 +16,7 @@ class Routing extends React.Component {
       <div className="Routing">
         <div className="section">Routing:</div>
         <TableContainer>
-          <Table>
+          <Table size="small">
             <TableHead>
               <TableRow>
                 <TableCell></TableCell>

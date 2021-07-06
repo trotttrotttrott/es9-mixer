@@ -18,7 +18,7 @@ class StereoLinks extends React.Component {
       <div className="StereoLinks">
         <div className="section">Stereo Links:</div>
         <TableContainer>
-          <Table>
+          <Table size="small">
             <TableHead>
               <TableRow>
                 <TableCell></TableCell>
