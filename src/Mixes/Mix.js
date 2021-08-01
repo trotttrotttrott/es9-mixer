@@ -29,10 +29,16 @@ class Mix extends React.Component {
         return
       }
 
+      var name = routeIn.name.split(' ').pop();
+      if (linked) {
+        name += '/';
+        name += ES9Static.routeIn[input+1].name.split(' ').pop();
+      }
+
       return (
         <Grid item key={i + 1}>
           <Channel
-            name={linked ? `${i+1}/${i+2}` : i+1}
+            name={name}
             number={i+1}
             volume={e.volume}
             updateVolume={this.updateVolume.bind(this)}
