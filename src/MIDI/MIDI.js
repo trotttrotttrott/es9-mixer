@@ -70,7 +70,7 @@ class MIDI extends React.Component {
     return (
       <Accordion className="MIDI">
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon color='secondary' />}
+          expandIcon={<ExpandMoreIcon color='primary' />}
         >
           <FormatListBulletedIcon />
           <span>MIDI Activity</span>

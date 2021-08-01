@@ -4,6 +4,26 @@ import Settings from './Settings/Settings';
 import MIDI from './MIDI/MIDI';
 import Mixes from './Mixes/Mixes';
 
+import {
+  createTheme,
+  ThemeProvider
+} from '@material-ui/core/styles';
+import {
+  teal,
+  purple
+} from '@material-ui/core/colors';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: teal['A200'],
+    },
+    secondary: {
+      main: purple['A700'],
+    },
+  },
+});
+
 class App extends React.Component {
 
   constructor(props) {
@@ -163,7 +183,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
       )
     } else {
       return (
-        <>
+        <ThemeProvider theme={theme}>
           <Status
             midiSupport={this.state.midiSupport}
             message={this.state.statusMessage}
@@ -197,7 +217,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             routeIn={this.state.routeIn}
             routeOut={this.state.routeOut}
           />
-        </>
+        </ThemeProvider>
       )
     }
   }

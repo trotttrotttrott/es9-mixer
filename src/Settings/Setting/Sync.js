@@ -14,7 +14,7 @@ class Refresh extends React.Component {
            this UI was loaded. Sync by requesting a config dump.</p>
         <Button
           variant="outlined"
-          color="secondary"
+          color="primary"
           size="small"
           startIcon={<SyncIcon />}
           onClick={this.props.requestConfig}

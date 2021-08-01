@@ -19,7 +19,7 @@ class Settings extends React.Component {
     return (
       <Accordion className="Settings">
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon color='secondary' />}
+          expandIcon={<ExpandMoreIcon color='primary' />}
         >
           <SettingsIcon />
           <span>Settings</span>

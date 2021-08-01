@@ -28,7 +28,7 @@ class Channel extends React.Component {
         <div className="slider">
           <Slider
             orientation="vertical"
-            color="secondary"
+            color="primary"
             valueLabelDisplay="auto"
             value={this.props.volume}
             min={0}
