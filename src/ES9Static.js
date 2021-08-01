@@ -127,7 +127,7 @@ class ES9Static {
       linkIndex: 0,
     },
     49: {
-      name: 'S/PDIF %',
+      name: 'S/PDIF R',
       type: 'spdif',
       linkIndex: 0,
     },
