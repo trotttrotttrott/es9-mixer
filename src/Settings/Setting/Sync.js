@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import SyncIcon from '@material-ui/icons/Sync';
 
-class Refresh extends React.Component {
+class Sync extends React.Component {
 
   render() {
     return (
@@ -26,4 +26,4 @@ class Refresh extends React.Component {
   }
 }
 
-export default Refresh;
+export default Sync;
