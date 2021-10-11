@@ -9,7 +9,7 @@ class Version {
   }
 
   output() {
-    return this.version;
+    return `Firmware version: ${this.version}`;
   }
 }
 

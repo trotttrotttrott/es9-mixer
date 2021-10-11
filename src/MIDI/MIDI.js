@@ -35,6 +35,7 @@ class MIDI extends React.Component {
   }
 
   componentDidMount() {
+    this.props.requestVersion();
     this.props.requestConfig();
     this.props.requestMix();
   }
@@ -55,14 +56,17 @@ class MIDI extends React.Component {
     if (!!instance.mixes) {
       this.props.setMixes(instance.mixes);
     }
-    if (!!instance.stereoLinks) {
-      this.props.setStereoLinks(instance.stereoLinks);
+    if (!!instance.version) {
+      this.props.setVersion(instance.version);
     }
     if (!!instance.routeIn) {
       this.props.setRouteIn(instance.routeIn);
     }
     if (!!instance.routeOut) {
       this.props.setRouteOut(instance.routeOut);
+    }
+    if (!!instance.stereoLinks) {
+      this.props.setStereoLinks(instance.stereoLinks);
     }
   }
 

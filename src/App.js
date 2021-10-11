@@ -132,6 +132,11 @@ ES-9 MIDI output ID: ${this.es9.output.id}
     });
   }
 
+  requestVersion() {
+    this.midiInfo('Requesting version');
+    this.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x22, 0xF7]);
+  }
+
   requestConfig() {
     this.midiInfo('Requesting config');
     this.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x23, 0xF7]);
@@ -156,9 +161,9 @@ ES-9 MIDI output ID: ${this.es9.output.id}
     this.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x34, (mix + 1) * 8 + (channel - 1), pan, 0xF7]);
   }
 
-  setStereoLinks(stereoLinks) {
+  setVersion(version) {
     this.setState({
-      stereoLinks: stereoLinks
+      version: version
     });
   }
 
@@ -171,6 +176,12 @@ ES-9 MIDI output ID: ${this.es9.output.id}
   setRouteOut(routeOut) {
     this.setState({
       routeOut: routeOut
+    });
+  }
+
+  setStereoLinks(stereoLinks) {
+    this.setState({
+      stereoLinks: stereoLinks
     });
   }
 
@@ -196,6 +207,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             message={this.state.statusMessage}
           />
           <Settings
+            version={this.state.version}
             mixes={this.state.mixes}
             settings={this.state.settings}
             showMix={this.showMix.bind(this)}
@@ -210,9 +222,11 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             midiInfo={this.midiInfo.bind(this)}
             midiRx={this.midiRx.bind(this)}
             setMixes={this.setMixes.bind(this)}
-            setStereoLinks={this.setStereoLinks.bind(this)}
+            setVersion={this.setVersion.bind(this)}
             setRouteIn={this.setRouteIn.bind(this)}
             setRouteOut={this.setRouteOut.bind(this)}
+            setStereoLinks={this.setStereoLinks.bind(this)}
+            requestVersion={this.requestVersion.bind(this)}
             requestConfig={this.requestConfig.bind(this)}
             requestMix={this.requestMix.bind(this)}
           />

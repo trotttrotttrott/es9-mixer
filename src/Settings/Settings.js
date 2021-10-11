@@ -49,6 +49,11 @@ class Settings extends React.Component {
                 requestConfig={this.props.requestConfig}
               />
             </Grid>
+            <Grid item xs={12}>
+              <div>
+                <div className="section version">Firmware Version: {this.props.version}</div>
+              </div>
+            </Grid>
           </Grid>
         </AccordionDetails>
       </Accordion>
