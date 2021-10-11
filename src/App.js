@@ -151,7 +151,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
 
   updatePan(mix, channel, pan) {
     var mixes = this.state.mixes;
-    mixes[mix][channel - 1].pan = pan;
+    mixes[mix][channel - 1].pan = pan - 1;
     this.setMixes(mixes);
     this.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x34, (mix + 1) * 8 + (channel - 1), pan, 0xF7]);
   }

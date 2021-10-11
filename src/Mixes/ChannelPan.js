@@ -6,7 +6,11 @@ import {
 class ChannelPan extends React.Component {
 
   updatePan(e, pan) {
-    this.props.updatePan(this.props.number, pan);
+    this.props.updatePan(this.props.number, pan + 64);
+  }
+
+  resetPan(e) {
+    this.props.updatePan(this.props.number, 64);
   }
 
   render() {
@@ -22,11 +26,13 @@ class ChannelPan extends React.Component {
             color="secondary"
             valueLabelDisplay="auto"
             track={false}
-            value={this.props.pan}
-            min={0}
-            max={127}
+            marks={[{value: 0}]}
+            value={this.props.pan - 63}
+            min={-63}
+            max={63}
             disabled={this.props.disable}
             onChange={this.updatePan.bind(this)}
+            onDoubleClick={this.resetPan.bind(this)}
           />
         </div>
       </div>
