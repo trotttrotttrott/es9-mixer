@@ -10,6 +10,7 @@ class MixDump {
       return Array(8).fill(0).map(function(_, channel) {
         var mix = {
           volume: data[c],
+          pan: data[c+1]
         };
         c += 2;
         return mix;

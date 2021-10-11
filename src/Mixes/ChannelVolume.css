@@ -1,0 +1,24 @@
+.ChannelVolume {
+  text-align: center;
+}
+
+.ChannelVolume .slider {
+  height: 300px;
+}
+
+.ChannelVolume .channel-name {
+  margin-top: 10px;
+  font-size: 75%;
+}
+
+.ChannelVolume .MuiButtonGroup-root .MuiButton-text {
+  padding: 6px 0;
+}
+
+.ChannelVolume .MuiButtonGroup-root .MuiButtonGroup-grouped {
+  min-width: 0;
+}
+
+.ChannelVolume .MuiSlider-root.MuiSlider-vertical {
+  width: 0;
+}

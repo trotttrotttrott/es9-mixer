@@ -4,9 +4,9 @@ import {
   Button,
   ButtonGroup
 } from '@material-ui/core';
-import './Channel.css';
+import './ChannelVolume.css';
 
-class Channel extends React.Component {
+class ChannelVolume extends React.Component {
 
   updateVolume(e, volume) {
     this.props.updateVolume(this.props.number, volume);
@@ -24,7 +24,7 @@ class Channel extends React.Component {
 
   render() {
     return (
-      <div className="Channel">
+      <div className="ChannelVolume">
         <div className="slider">
           <Slider
             orientation="vertical"
@@ -73,4 +73,4 @@ class Channel extends React.Component {
   }
 }
 
-export default Channel;
+export default ChannelVolume;

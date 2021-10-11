@@ -1,7 +1,8 @@
 import React from 'react';
 import ES9Static from '../ES9Static';
 import { Grid } from '@material-ui/core';
-import Channel from './Channel';
+import ChannelVolume from './ChannelVolume';
+import ChannelPan from './ChannelPan';
 import './Mix.css';
 
 class Mix extends React.Component {
@@ -10,9 +11,16 @@ class Mix extends React.Component {
     this.props.updateVolume(this.props.number, channel, volume);
   }
 
+  updatePan(channel, pan) {
+    this.props.updatePan(this.props.number, channel, pan);
+  }
+
   render() {
 
-    var channels = this.props.channels.map(function(e, i) {
+    var channelVolume = [];
+    var channelPan = [];
+
+    this.props.channels.forEach(function(e, i) {
 
       var routeIndex;
       if (this.props.number < 8) {
@@ -35,13 +43,24 @@ class Mix extends React.Component {
         name += ES9Static.routeIn[input+1].name.split(' ').pop();
       }
 
-      return (
+      channelVolume.push(
         <Grid item key={i + 1}>
-          <Channel
+          <ChannelVolume
             name={name}
             number={i+1}
             volume={e.volume}
             updateVolume={this.updateVolume.bind(this)}
+            disable={this.props.secondaryLink}
+          />
+        </Grid>
+      );
+      channelPan.push(
+        <Grid item key={i + 1}>
+          <ChannelPan
+            name={name}
+            number={i+1}
+            pan={e.pan}
+            updatePan={this.updatePan.bind(this)}
             disable={this.props.secondaryLink}
           />
         </Grid>
@@ -68,7 +87,10 @@ class Mix extends React.Component {
           <span>{outputName}</span>
         </div>
         <Grid container spacing={2}>
-          {channels}
+          {channelVolume}
+        </Grid>
+        <Grid container direction="column">
+          {channelPan}
         </Grid>
       </div>
     )

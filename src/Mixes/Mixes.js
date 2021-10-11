@@ -27,6 +27,7 @@ class Mixes extends React.Component {
               number={i}
               channels={e}
               updateVolume={this.props.updateVolume}
+              updatePan={this.props.updatePan}
               stereoLinks={this.props.stereoLinks}
               routeIn={this.props.routeIn}
               routeOut={this.props.routeOut}
