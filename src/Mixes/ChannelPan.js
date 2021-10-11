@@ -26,7 +26,11 @@ class ChannelPan extends React.Component {
             color="secondary"
             valueLabelDisplay="auto"
             track={false}
-            marks={[{value: 0}]}
+            marks={[
+              {value: -63},
+              {value: 0},
+              {value: 63},
+            ]}
             value={this.props.pan - 63}
             min={-63}
             max={63}

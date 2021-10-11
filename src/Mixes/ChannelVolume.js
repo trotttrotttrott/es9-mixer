@@ -30,6 +30,10 @@ class ChannelVolume extends React.Component {
             orientation="vertical"
             color="primary"
             valueLabelDisplay="auto"
+            marks={[
+              {value: 103},
+              {value: 127},
+            ]}
             value={this.props.volume}
             min={0}
             max={127}
