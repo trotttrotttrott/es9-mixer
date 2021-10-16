@@ -11,7 +11,6 @@ class Status extends React.Component {
           <div className="Status">
             <header>
               <div>
-                <span>Web MIDI status: </span>
                 <span className={String(this.props.midiSupport)}>{this.props.message}</span>
               </div>
             </header>

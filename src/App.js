@@ -54,7 +54,7 @@ class App extends React.Component {
     } else {
       this.setState({
         midiSupport: false,
-        statusMessage: 'No MIDI support in your browser.'
+        statusMessage: 'Browser does not support MIDI'
       });
     }
   }
@@ -77,7 +77,7 @@ class App extends React.Component {
     if ([this.es9.input, this.es9.output].includes(undefined)) {
       this.setState({
         midiSupport: false,
-        statusMessage: 'ES-9 not found.'
+        statusMessage: 'ES-9 not found'
       });
       return;
     }
