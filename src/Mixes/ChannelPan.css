@@ -1,3 +1,7 @@
 .ChannelPan .MuiSlider-root {
   padding: 10px 0;
 }
+
+.ChannelPan .MuiSlider-rail {
+  opacity: 20%;
+}
