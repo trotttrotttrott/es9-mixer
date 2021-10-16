@@ -29,7 +29,7 @@ class ChannelVolume extends React.Component {
           <Slider
             orientation="vertical"
             color="primary"
-            valueLabelDisplay="auto"
+            valueLabelDisplay="off"
             marks={[
               {value: 103},
               {value: 127},

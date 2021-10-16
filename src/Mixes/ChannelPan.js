@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Slider,
 } from '@material-ui/core';
+import './ChannelPan.css';
 
 class ChannelPan extends React.Component {
 
@@ -24,7 +25,7 @@ class ChannelPan extends React.Component {
         <div className="slider">
           <Slider
             color="secondary"
-            valueLabelDisplay="auto"
+            valueLabelDisplay="off"
             track={false}
             marks={[
               {value: -63},
