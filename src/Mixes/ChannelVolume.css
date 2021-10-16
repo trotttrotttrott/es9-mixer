@@ -12,7 +12,11 @@
 }
 
 .ChannelVolume .MuiButtonGroup-root .MuiButton-text {
-  padding: 6px 0;
+  padding: 4px 0 12px;
+}
+
+.ChannelVolume .MuiButtonGroup-root .MuiButton-text.bump {
+  padding: 4px 0 7px;
 }
 
 .ChannelVolume .MuiButtonGroup-root .MuiButtonGroup-grouped {
