@@ -7,6 +7,9 @@ interface](https://www.expert-sleepers.co.uk/es9.html).
 
 Intended as an alternative the ES-9 config tool when you just want to mix.
 
+There's some discussion on this [mod wiggler
+topic](https://www.modwiggler.com/forum/viewtopic.php?f=35&t=251065).
+
 ## Firmware
 
 Requires firmware 1.2.0 or later which can be downloaded
