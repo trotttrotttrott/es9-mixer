@@ -7,11 +7,11 @@ import Mixes from './Mixes/Mixes';
 import {
   createTheme,
   ThemeProvider
-} from '@material-ui/core/styles';
+} from '@mui/material/styles';
 import {
   teal,
   purple
-} from '@material-ui/core/colors';
+} from '@mui/material/colors';
 
 const theme = createTheme({
   palette: {
@@ -30,6 +30,10 @@ class App extends React.Component {
     super(props);
 
     this.es9 = {};
+    this.midi = null;
+
+    this.es9InputName = 'ES-9 MIDI In';
+    this.es9OutputName = 'ES-9 MIDI Out';
 
     var settings = JSON.parse(window.localStorage.getItem('settings'));
     if (settings == null) {
@@ -44,6 +48,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.requestMIDI();
+  }
+
+  requestMIDI() {
     if (navigator.requestMIDIAccess) {
       navigator.requestMIDIAccess({
         sysex: true
@@ -61,14 +69,16 @@ class App extends React.Component {
 
   onMIDISuccess(midi) {
 
+    this.midi = midi;
+
     midi.inputs.forEach(function(value, key, map) {
-      if (value.name === 'ES-9 MIDI In') {
+      if (value.name === this.es9InputName) {
         this.es9.input = value;
         return;
       }
     }.bind(this));
     midi.outputs.forEach(function(value, key, map) {
-      if (value.name === 'ES-9 MIDI Out') {
+      if (value.name === this.es9OutputName) {
         this.es9.output = value;
         return;
       }
@@ -96,10 +106,19 @@ ES-9 MIDI output ID: ${this.es9.output.id}
   }
 
   onMIDIFailure(msg) {
+    this.es9 = {};
     this.setState({
       midiSupport: false,
       statusMessage: msg
     });
+  }
+
+  // Status functions
+
+  setMIDI(input, output) {
+    this.es9InputName = input;
+    this.es9OutputName = output;
+    this.requestMIDI();
   }
 
   // Settings functions
@@ -192,20 +211,18 @@ ES-9 MIDI output ID: ${this.es9.output.id}
       )
     } else if (!this.state.midiSupport) {
       return (
-        <>
+        <ThemeProvider theme={theme}>
           <Status
+            midi={this.midi}
             midiSupport={this.state.midiSupport}
             message={this.state.statusMessage}
+            setMIDI={this.setMIDI.bind(this)}
           />
-        </>
+        </ThemeProvider>
       )
     } else {
       return (
         <ThemeProvider theme={theme}>
-          <Status
-            midiSupport={this.state.midiSupport}
-            message={this.state.statusMessage}
-          />
           <Settings
             version={this.state.version}
             mixes={this.state.mixes}
@@ -229,6 +246,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             requestVersion={this.requestVersion.bind(this)}
             requestConfig={this.requestConfig.bind(this)}
             requestMix={this.requestMix.bind(this)}
+            onMIDIFailure={this.onMIDIFailure.bind(this)}
           />
           <Mixes
             mixes={this.state.mixes}

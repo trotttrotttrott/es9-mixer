@@ -6,9 +6,9 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails
-} from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 import ConfigDump from './Message/ConfigDump'
 import MixDump from './Message/MixDump'
@@ -48,6 +48,13 @@ class MIDI extends React.Component {
   onMIDIMessage(message) {
     this.props.midiInfo(`Received sysex (${message.data.length} bytes)`);
     var type = this.types[message.data[5]];
+
+    if (type === undefined) {
+      this.props.es9.input.onmidimessage = null;
+      this.props.onMIDIFailure('The selected MIDI device does not appear to be an ES-9');
+      return;
+    }
+
     this.props.midiRx(`${type.type} received.`);
     var instance = new type(message.data);
     if (!!instance.output) {

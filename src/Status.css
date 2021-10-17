@@ -5,3 +5,15 @@
 .Status .false {
   color: red;
 }
+
+.Status .MuiOutlinedInput-root {
+  color: #fff;
+}
+
+.Status .MuiInputLabel-root {
+  color: #fff;
+}
+
+.Status .MuiSelect-icon {
+  color: #fff;
+}
