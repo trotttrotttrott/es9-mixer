@@ -30,6 +30,7 @@ class ChannelVolume extends React.Component {
             orientation="vertical"
             color="primary"
             valueLabelDisplay="off"
+            size="small"
             marks={[
               {value: 103},
               {value: 127},

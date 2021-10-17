@@ -26,6 +26,7 @@ class ChannelPan extends React.Component {
           <Slider
             color="secondary"
             valueLabelDisplay="off"
+            size="small"
             track={false}
             marks={[
               {value: -63},
