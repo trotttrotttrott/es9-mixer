@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Slider,
-} from '@material-ui/core';
+} from '@mui/material';
 import './ChannelPan.css';
 
 class ChannelPan extends React.Component {

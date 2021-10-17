@@ -3,7 +3,7 @@ import {
   Slider,
   Button,
   ButtonGroup
-} from '@material-ui/core';
+} from '@mui/material';
 import './ChannelVolume.css';
 
 class ChannelVolume extends React.Component {

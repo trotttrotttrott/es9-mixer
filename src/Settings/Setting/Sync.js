@@ -1,8 +1,8 @@
 import React from 'react';
 import {
   Button
-} from '@material-ui/core';
-import SyncIcon from '@material-ui/icons/Sync';
+} from '@mui/material';
+import SyncIcon from '@mui/icons-material/Sync';
 
 class Sync extends React.Component {
 

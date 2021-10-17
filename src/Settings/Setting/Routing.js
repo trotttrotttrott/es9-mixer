@@ -7,7 +7,7 @@ import {
   TableBody,
   TableRow,
   TableCell
-} from '@material-ui/core';
+} from '@mui/material';
 
 class Routing extends React.Component {
 

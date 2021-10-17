@@ -1,6 +1,6 @@
 import React from 'react';
 import ES9Static from '../ES9Static';
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 import ChannelVolume from './ChannelVolume';
 import ChannelPan from './ChannelPan';
 import './Mix.css';
