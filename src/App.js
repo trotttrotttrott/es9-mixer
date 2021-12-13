@@ -42,8 +42,18 @@ class App extends React.Component {
       }
       window.localStorage.setItem('settings', JSON.stringify(settings));
     }
+
+    // Snapshots allow you to recall saved volume and pan values for mixes.
+    // Each snapshot is scoped to a single mix.
+    var snapshots = JSON.parse(window.localStorage.getItem('snapshots'));
+    if (snapshots == null) {
+      snapshots = Array(16).fill([]);
+      window.localStorage.setItem('snapshots', JSON.stringify(snapshots));
+    }
+
     this.state = {
-      settings: settings
+      settings: settings,
+      snapshots: snapshots,
     };
   }
 
@@ -166,20 +176,6 @@ ES-9 MIDI output ID: ${this.es9.output.id}
     this.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x2A, 0xF7]);
   }
 
-  updateVolume(mix, channel, volume) {
-    var mixes = this.state.mixes;
-    mixes[mix][channel - 1].volume = volume;
-    this.setMixes(mixes);
-    this.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x34, mix * 8 + (channel - 1), volume, 0xF7]);
-  }
-
-  updatePan(mix, channel, pan) {
-    var mixes = this.state.mixes;
-    mixes[mix][channel - 1].pan = pan - 1;
-    this.setMixes(mixes);
-    this.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x34, (mix + 1) * 8 + (channel - 1), pan, 0xF7]);
-  }
-
   setVersion(version) {
     this.setState({
       version: version
@@ -202,6 +198,44 @@ ES-9 MIDI output ID: ${this.es9.output.id}
     this.setState({
       stereoLinks: stereoLinks
     });
+  }
+
+  // Mix functions
+
+  updateVolume(mix, channel, volume) {
+    var mixes = this.state.mixes;
+    mixes[mix][channel - 1].volume = volume;
+    this.setMixes(mixes);
+    this.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x34, mix * 8 + (channel - 1), volume, 0xF7]);
+  }
+
+  updatePan(mix, channel, pan) {
+    var mixes = this.state.mixes;
+    mixes[mix][channel - 1].pan = pan - 1;
+    this.setMixes(mixes);
+    this.es9.output.send([0xF0, 0x00, 0x21, 0x27, 0x19, 0x34, (mix + 1) * 8 + (channel - 1), pan, 0xF7]);
+  }
+
+  takeSnapshot(mix, channels) {
+    var snapshots = JSON.parse(window.localStorage.getItem('snapshots'));
+    snapshots[mix].push(channels);
+    window.localStorage.setItem('snapshots', JSON.stringify(snapshots));
+    this.setState({ snapshots: snapshots });
+  }
+
+  applySnapshot(mix, snapshot) {
+    var snapshots = JSON.parse(window.localStorage.getItem('snapshots'));
+    snapshots[mix][snapshot].forEach(function(e, i) {
+      this.updateVolume(mix, i + 1, e.volume);
+      this.updatePan(mix, i + 1, e.pan);
+    }.bind(this));
+  }
+
+  deleteSnapshot(mix, snapshot) {
+    var snapshots = JSON.parse(window.localStorage.getItem('snapshots'));
+    snapshots[mix].splice(snapshot, 1);
+    window.localStorage.setItem('snapshots', JSON.stringify(snapshots));
+    this.setState({ snapshots: snapshots });
   }
 
   render() {
@@ -256,6 +290,10 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             stereoLinks={this.state.stereoLinks}
             routeIn={this.state.routeIn}
             routeOut={this.state.routeOut}
+            takeSnapshot={this.takeSnapshot.bind(this)}
+            applySnapshot={this.applySnapshot.bind(this)}
+            deleteSnapshot={this.deleteSnapshot.bind(this)}
+            snapshots={this.state.snapshots}
           />
         </ThemeProvider>
       )

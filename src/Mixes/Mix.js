@@ -3,6 +3,7 @@ import ES9Static from '../ES9Static';
 import { Grid } from '@mui/material';
 import ChannelVolume from './ChannelVolume';
 import ChannelPan from './ChannelPan';
+import Snapshots from './Snapshots';
 import './Mix.css';
 
 class Mix extends React.Component {
@@ -13,6 +14,18 @@ class Mix extends React.Component {
 
   updatePan(channel, pan) {
     this.props.updatePan(this.props.number, channel, pan);
+  }
+
+  takeSnapshot() {
+    this.props.takeSnapshot(this.props.number, this.props.channels);
+  }
+
+  applySnapshot(snapshot) {
+    this.props.applySnapshot(this.props.number, snapshot);
+  }
+
+  deleteSnapshot(snapshot) {
+    this.props.deleteSnapshot(this.props.number, snapshot);
   }
 
   render() {
@@ -89,9 +102,20 @@ class Mix extends React.Component {
         <Grid container spacing={2}>
           {channelVolume}
         </Grid>
-        <Grid container direction="column">
-          {channelPan}
-        </Grid>
+        {
+          !this.props.secondaryLink &&
+          <>
+            <Grid container direction="column">
+              {channelPan}
+            </Grid>
+            <Snapshots
+              takeSnapshot={this.takeSnapshot.bind(this)}
+              applySnapshot={this.applySnapshot.bind(this)}
+              deleteSnapshot={this.deleteSnapshot.bind(this)}
+              snapshots={this.props.snapshots}
+            />
+          </>
+        }
       </div>
     )
   }

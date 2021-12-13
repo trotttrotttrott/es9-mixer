@@ -33,6 +33,10 @@ class Mixes extends React.Component {
               routeOut={this.props.routeOut}
               primaryLink={primaryLink}
               secondaryLink={secondaryLink}
+              takeSnapshot={this.props.takeSnapshot}
+              applySnapshot={this.props.applySnapshot}
+              deleteSnapshot={this.props.deleteSnapshot}
+              snapshots={this.props.snapshots[i]}
             />
           </Grid>
         )

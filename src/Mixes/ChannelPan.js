@@ -15,11 +15,6 @@ class ChannelPan extends React.Component {
   }
 
   render() {
-
-    if (this.props.disable) {
-      return (<></>)
-    }
-
     return (
       <div className="ChannelPan">
         <div className="slider">
