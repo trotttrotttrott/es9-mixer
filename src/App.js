@@ -231,7 +231,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
     var snapshots = JSON.parse(window.localStorage.getItem('snapshots'));
     snapshots[mix][snapshot].forEach(function(e, i) {
       this.updateVolume(mix, i + 1, e.volume);
-      this.updatePan(mix, i + 1, e.pan);
+      this.updatePan(mix, i + 1, e.pan + 1);
     }.bind(this));
   }
 
