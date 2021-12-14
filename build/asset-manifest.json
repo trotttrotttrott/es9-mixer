@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "https://trotttrotttrott.com/es9-mixer/build/static/css/main.aa3516a8.chunk.css",
+    "main.js": "https://trotttrotttrott.com/es9-mixer/build/static/js/main.975ede0b.chunk.js",
+    "main.js.map": "https://trotttrotttrott.com/es9-mixer/build/static/js/main.975ede0b.chunk.js.map",
+    "runtime-main.js": "https://trotttrotttrott.com/es9-mixer/build/static/js/runtime-main.b220fb76.js",
+    "runtime-main.js.map": "https://trotttrotttrott.com/es9-mixer/build/static/js/runtime-main.b220fb76.js.map",
+    "static/js/2.903caf53.chunk.js": "https://trotttrotttrott.com/es9-mixer/build/static/js/2.903caf53.chunk.js",
+    "static/js/2.903caf53.chunk.js.map": "https://trotttrotttrott.com/es9-mixer/build/static/js/2.903caf53.chunk.js.map",
+    "index.html": "https://trotttrotttrott.com/es9-mixer/build/index.html",
+    "static/css/main.aa3516a8.chunk.css.map": "https://trotttrotttrott.com/es9-mixer/build/static/css/main.aa3516a8.chunk.css.map",
+    "static/js/2.903caf53.chunk.js.LICENSE.txt": "https://trotttrotttrott.com/es9-mixer/build/static/js/2.903caf53.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b220fb76.js",
+    "static/js/2.903caf53.chunk.js",
+    "static/css/main.aa3516a8.chunk.css",
+    "static/js/main.975ede0b.chunk.js"
+  ]
+}
