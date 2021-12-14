@@ -51,7 +51,6 @@ class ChannelVolume extends React.Component {
             <div>
               <ButtonGroup
                 orientation="vertical"
-                color="secondary"
                 variant="text"
               >
                 <Button className="bump" onClick={this.bumpVolume.bind(this, null, 5)}>+</Button>

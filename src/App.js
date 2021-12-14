@@ -10,16 +10,20 @@ import {
 } from '@mui/material/styles';
 import {
   teal,
-  purple
+  purple,
+  cyan
 } from '@mui/material/colors';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: teal['A200'],
+      main: cyan['A400'],
     },
     secondary: {
-      main: purple['A700'],
+      main: purple['A400'],
+    },
+    tertiary: {
+      main: teal['A200'],
     },
   },
 });

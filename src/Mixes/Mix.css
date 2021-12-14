@@ -18,19 +18,3 @@
   color: inherit;
   font-size: inherit;
 }
-
-.Mix .Snapshots .MuiButton-root {
-  min-width: 0;
-  padding: 7px 5px 9px;
-  line-height: 0;
-  font-size: 65%;
-  text-transform: none;
-}
-
-.Mix .Snapshots .MuiButton-outlined {
-  margin-left: 10px;
-}
-
-.Mix .Snapshots .MuiButton-text {
-  margin-left: 2px;
-}

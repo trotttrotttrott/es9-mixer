@@ -4,6 +4,7 @@ import {
   Button
 } from '@mui/material';
 import PhotoCameraOutlinedIcon from '@mui/icons-material/PhotoCameraOutlined';
+import './Snapshots.css';
 
 class Snapshots extends React.Component {
 
@@ -22,11 +23,13 @@ class Snapshots extends React.Component {
         <span key={i}>
           <Button
             variant="outlined"
+            color="tertiary"
             size="small"
             onClick={this.applySnapshot.bind(this, i)}
           >{String.fromCharCode(97+i)}</Button>
           <Button
             variant="text"
+            color="tertiary"
             size="small"
             onClick={this.deleteSnapshot.bind(this, i)}
           >x</Button>
@@ -37,7 +40,7 @@ class Snapshots extends React.Component {
     return (
       <div className="Snapshots">
         <IconButton
-          color="primary"
+          color="tertiary"
           size="small"
           onClick={this.props.takeSnapshot}
         >
