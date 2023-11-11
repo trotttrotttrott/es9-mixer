@@ -1,0 +1,28 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PUBLIC_URL: https://trotttrotttrott.com/es9-mixer/build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 21
+      - run: yarn install
+      - run: yarn build
+      - run: git add -f build
+      - run: git config --global user.email '69285523+bottbottbott@users.noreply.github.com'
+      - run: git config --global user.name 'bottbottbott'
+      - run: git commit -m '[GH] es9-mixer build'
+      - run: git push -f origin HEAD:build
