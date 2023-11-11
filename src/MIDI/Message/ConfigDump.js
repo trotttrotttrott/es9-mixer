@@ -4,10 +4,19 @@ class ConfigDump {
 
   static type = 'ConfigDump';
 
-  constructor(data) {
-    this.routeIn(data.slice(8, -1));
-    this.routeOut(data.slice(8, -1));
-    this.stereoLinks(data.slice(459, 459+31));
+  constructor(wdata) {
+    let count = ( wdata.length - 8 - 1 ) / 3;
+    let data = [];
+    let index = 8;
+    for ( let i=0; i<count; ++i ) {
+      let w2 = wdata[ index++ ];
+      let w1 = wdata[ index++ ];
+      let w0 = wdata[ index++ ];
+      data.push( ( w2 << 14 ) | ( w1 << 7 ) | w0 );
+    }
+    this.routeIn(data);
+    this.routeOut(data);
+    this.stereoLinks(data);
   }
 
   routeIn(data) {
@@ -58,26 +67,18 @@ class ConfigDump {
     var usb = []; // 16-23
     var mix = []; // 24-31
 
-    var links0 = 0;
-    var links1 = 0;
+    var links0 = data[451];
+    var links1 = data[452];
 
-    var i;
-    var c = 0;
-
-    for ( i=0; i<4; ++i ) {
-      links0 = ( links0 << 4 ) | data[c]; c++;
-    }
-    for ( i=0; i<4; ++i ) {
-      links1 = ( links1 << 4 ) | data[c]; c++;
-    }
     var links = ( links1 << 16 ) | links0;
-    for ( i=0; i<7; ++i ) {
+
+    for ( let i=0; i<7; ++i ) {
       input[i] = ( links >> i ) & 1;
     }
-    for ( i=0; i<8; ++i ) {
+    for ( let i=0; i<8; ++i ) {
       bus[i] = ( links >> (8+i) ) & 1;
     }
-    for ( i=0; i<4; ++i ) {
+    for ( let i=0; i<4; ++i ) {
       usb[i] = ( links >> (16+i) ) & 1;
       usb[i+4] = ( links >> (20+i) ) & 1;
       mix[i] = ( links >> (24+i) ) & 1;
