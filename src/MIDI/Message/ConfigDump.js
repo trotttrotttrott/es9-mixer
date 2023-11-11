@@ -1,6 +1,6 @@
 class ConfigDump {
 
-  static id = 0x10;
+  static id = 0x08;
 
   static type = 'ConfigDump';
 
