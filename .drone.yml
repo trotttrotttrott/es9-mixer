@@ -5,7 +5,7 @@ name: build
 steps:
 
 - name: build
-  image: node:16.3.0-alpine3.13
+  image: node:21.1.0-alpine3.17
   environment:
     PUBLIC_URL: https://trotttrotttrott.com/es9-mixer/build
   commands:
@@ -13,7 +13,7 @@ steps:
   - yarn build
 
 - name: push
-  image: alpine/git:v2.26.2
+  image: alpine/git:v2.40.1
   environment:
     DEPLOY_KEY:
       from_secret: github_deploy_key
