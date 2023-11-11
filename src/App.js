@@ -109,7 +109,7 @@ class App extends React.Component {
     this.setState({
       midiSupport: true,
       statusMessage: 'OK',
-      midiInfo: `This version is for ES-9 firmware v1.2.0 and above.
+      midiInfo: `This version is for ES-9 firmware v1.3.0 and above.
 
 ES-9 MIDI input ID: ${this.es9.input.id}
 ES-9 MIDI output ID: ${this.es9.output.id}
