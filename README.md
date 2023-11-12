@@ -12,7 +12,7 @@ topic](https://www.modwiggler.com/forum/viewtopic.php?f=35&t=251065).
 
 ## Firmware
 
-Requires firmware 1.2.0 or later which can be downloaded
+Requires firmware 1.3.0 or later which can be downloaded
 [here](https://www.expert-sleepers.co.uk/es9firmware.html).
 
 ## Usage
