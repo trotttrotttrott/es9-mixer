@@ -85,25 +85,36 @@ class App extends React.Component {
 
     this.midi = midi;
 
+    var es9Inputs = [];
+    var es9Outputs = [];
+
     midi.inputs.forEach(function(value, key, map) {
       if (value.name === this.es9InputName) {
-        this.es9.input = value;
-        return;
+        es9Inputs.push(value);
       }
     }.bind(this));
     midi.outputs.forEach(function(value, key, map) {
       if (value.name === this.es9OutputName) {
-        this.es9.output = value;
-        return;
+        es9Outputs.push(value);
       }
     }.bind(this));
 
-    if ([this.es9.input, this.es9.output].includes(undefined)) {
-      this.setState({
-        midiSupport: false,
-        statusMessage: 'ES-9 not found'
-      });
-      return;
+    switch (true) {
+      case es9Inputs.length === 0 || es9Outputs.length === 0:
+        this.setState({
+          midiSupport: false,
+          statusMessage: 'ES-9 not detected'
+        });
+        return;
+      case es9Inputs.length > 1 || es9Outputs.length > 1:
+        this.setState({
+          midiSupport: false,
+          statusMessage: 'Multiple ES-9s detected'
+        });
+        return
+      default:
+        this.es9.input = es9Inputs[0];
+        this.es9.output = es9Outputs[0];
     }
 
     this.setState({

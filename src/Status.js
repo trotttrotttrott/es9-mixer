@@ -66,10 +66,10 @@ class Status extends React.Component {
     var inputs = [];
     var outputs = [];
     this.props.midi?.inputs.forEach(function(value, key, map) {
-      inputs.push(<MenuItem key={value.id} value={value.name}>{value.name}</MenuItem>);
+      inputs.push(<MenuItem key={value.id} value={value.name}>{value.name} ({value.id})</MenuItem>);
     });
     this.props.midi?.outputs.forEach(function(value, key, map) {
-      outputs.push(<MenuItem key={value.id} value={value.name}>{value.name}</MenuItem>);
+      outputs.push(<MenuItem key={value.id} value={value.name}>{value.name} ({value.id})</MenuItem>);
     });
 
     return (
@@ -81,12 +81,12 @@ class Status extends React.Component {
           inputs.length > 0 &&
           outputs.length > 0 &&
           <>
-            <p>Your ES-9 may be named differently than expected.</p>
             <p>Select your ES-9 input and output below.</p>
             <FormControl sx={{ m: 1, minWidth: 200 }}>
               <InputLabel id="input-label">Select MIDI Input</InputLabel>
               <Select
                 labelId="input-label"
+                label="Select MIDI Input"
                 value={this.state?.input}
                 onChange={this.setInput.bind(this)}
               >{inputs}</Select>
@@ -96,6 +96,7 @@ class Status extends React.Component {
               <InputLabel id="ouput-label">Select MIDI Output</InputLabel>
               <Select
                 labelId="output-label"
+                label="Select MIDI Output"
                 value={this.state?.output}
                 onChange={this.setOutput.bind(this)}
               >{outputs}</Select>
