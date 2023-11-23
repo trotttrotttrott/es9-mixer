@@ -14,24 +14,24 @@ class Status extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: '',
-      output: '',
+      inputID: '',
+      outputID: '',
       inputError: null,
       outputError: null,
       error: null
     };
   }
 
-  setInput(e, item) {
+  setInputID(e, item) {
     this.setState({
-      input: item.props.value,
+      inputID: item.props.value,
       inputError: ''
     });
   }
 
-  setOutput(e, item) {
+  setOutputID(e, item) {
     this.setState({
-      output: item.props.value,
+      outputID: item.props.value,
       outputError: ''
     });
   }
@@ -40,14 +40,14 @@ class Status extends React.Component {
 
     var fail = false;
 
-    if (this.state.input === '') {
+    if (this.state.inputID === '') {
       this.setState({
         inputError: 'Input not selected'
       })
       fail = true;
     }
 
-    if (this.state.output === '') {
+    if (this.state.outputID === '') {
       this.setState({
         outputError: 'Output not selected'
       })
@@ -58,18 +58,18 @@ class Status extends React.Component {
       return;
     }
 
-    this.props.setMIDI(this.state.input, this.state.output);
+    this.props.setMIDI(this.state.inputID, this.state.outputID);
   }
 
   render() {
 
     var inputs = [];
     var outputs = [];
-    this.props.midi?.inputs.forEach(function(value, key, map) {
-      inputs.push(<MenuItem key={value.id} value={value.name}>{value.name} ({value.id})</MenuItem>);
+    this.props.midi?.inputs.forEach(function(input, key, map) {
+      inputs.push(<MenuItem key={input.id} value={input.id}>{input.name} ({input.id})</MenuItem>);
     });
-    this.props.midi?.outputs.forEach(function(value, key, map) {
-      outputs.push(<MenuItem key={value.id} value={value.name}>{value.name} ({value.id})</MenuItem>);
+    this.props.midi?.outputs.forEach(function(output, key, map) {
+      outputs.push(<MenuItem key={output.id} value={output.id}>{output.name} ({output.id})</MenuItem>);
     });
 
     return (
@@ -87,8 +87,8 @@ class Status extends React.Component {
               <Select
                 labelId="input-label"
                 label="Select MIDI Input"
-                value={this.state?.input}
-                onChange={this.setInput.bind(this)}
+                value={this.state?.inputID}
+                onChange={this.setInputID.bind(this)}
               >{inputs}</Select>
               <FormHelperText error>{this.state.inputError}</FormHelperText>
             </FormControl>
@@ -97,8 +97,8 @@ class Status extends React.Component {
               <Select
                 labelId="output-label"
                 label="Select MIDI Output"
-                value={this.state?.output}
-                onChange={this.setOutput.bind(this)}
+                value={this.state?.outputID}
+                onChange={this.setOutputID.bind(this)}
               >{outputs}</Select>
               <FormHelperText error>{this.state.outputError}</FormHelperText>
             </FormControl>

@@ -36,8 +36,14 @@ class App extends React.Component {
     this.es9 = {};
     this.midi = null;
 
-    this.es9InputName = 'ES-9 MIDI In';
-    this.es9OutputName = 'ES-9 MIDI Out';
+    this.es9InputTarget = {
+      name: 'ES-9 MIDI In',
+      id: null
+    };
+    this.es9OutputTarget = {
+      name: 'ES-9 MIDI Out',
+      id: null
+    };
 
     var settings = JSON.parse(window.localStorage.getItem('settings'));
     if (settings == null) {
@@ -88,14 +94,23 @@ class App extends React.Component {
     var es9Inputs = [];
     var es9Outputs = [];
 
-    midi.inputs.forEach(function(value, key, map) {
-      if (value.name === this.es9InputName) {
-        es9Inputs.push(value);
+
+    midi.inputs.forEach(function(input, key, map) {
+      if (this.es9InputTarget.id !== null) {
+        if (input.id === this.es9InputTarget.id) {
+          es9Inputs.push(input);
+        }
+      } else if (input.name === this.es9InputTarget.name) {
+        es9Inputs.push(input);
       }
     }.bind(this));
-    midi.outputs.forEach(function(value, key, map) {
-      if (value.name === this.es9OutputName) {
-        es9Outputs.push(value);
+    midi.outputs.forEach(function(output, key, map) {
+      if (this.es9OutputTarget.id !== null) {
+        if (output.id === this.es9OutputTarget.id) {
+          es9Outputs.push(output);
+        }
+      } else if (output.name === this.es9OutputTarget.name) {
+        es9Outputs.push(output);
       }
     }.bind(this));
 
@@ -140,9 +155,9 @@ ES-9 MIDI output ID: ${this.es9.output.id}
 
   // Status functions
 
-  setMIDI(input, output) {
-    this.es9InputName = input;
-    this.es9OutputName = output;
+  setMIDI(inputID, outputID) {
+    this.es9InputTarget.id = inputID;
+    this.es9OutputTarget.id = outputID;
     this.requestMIDI();
   }
 
