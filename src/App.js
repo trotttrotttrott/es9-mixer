@@ -75,7 +75,7 @@ class App extends React.Component {
       );
     } else {
       this.setState({
-        midiSupport: false,
+        mixerReady: false,
         statusMessage: 'Browser does not support MIDI'
       });
     }
@@ -102,13 +102,13 @@ class App extends React.Component {
     switch (true) {
       case es9Inputs.length === 0 || es9Outputs.length === 0:
         this.setState({
-          midiSupport: false,
+          mixerReady: false,
           statusMessage: 'ES-9 not detected'
         });
         return;
       case es9Inputs.length > 1 || es9Outputs.length > 1:
         this.setState({
-          midiSupport: false,
+          mixerReady: false,
           statusMessage: 'Multiple ES-9s detected'
         });
         return
@@ -118,7 +118,7 @@ class App extends React.Component {
     }
 
     this.setState({
-      midiSupport: true,
+      mixerReady: true,
       statusMessage: 'OK',
       midiInfo: `This version is for ES-9 firmware v1.3.0 and above.
 
@@ -133,7 +133,7 @@ ES-9 MIDI output ID: ${this.es9.output.id}
   onMIDIFailure(msg) {
     this.es9 = {};
     this.setState({
-      midiSupport: false,
+      mixerReady: false,
       statusMessage: msg
     });
   }
@@ -254,16 +254,16 @@ ES-9 MIDI output ID: ${this.es9.output.id}
   }
 
   render() {
-    if (this.state === null || this.state.midiSupport === null) {
+    if (this.state === null || this.state.mixerReady === null) {
       return (
         <>Loading...</>
       )
-    } else if (!this.state.midiSupport) {
+    } else if (!this.state.mixerReady) {
       return (
         <ThemeProvider theme={theme}>
           <Status
             midi={this.midi}
-            midiSupport={this.state.midiSupport}
+            mixerReady={this.state.mixerReady}
             message={this.state.statusMessage}
             setMIDI={this.setMIDI.bind(this)}
           />

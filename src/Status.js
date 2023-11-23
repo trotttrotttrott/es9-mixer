@@ -42,14 +42,14 @@ class Status extends React.Component {
 
     if (this.state.input === '') {
       this.setState({
-        inputError: 'Input is not selected'
+        inputError: 'Input not selected'
       })
       fail = true;
     }
 
     if (this.state.output === '') {
       this.setState({
-        outputError: 'Output is not selected'
+        outputError: 'Output not selected'
       })
       fail = true;
     }
@@ -75,7 +75,7 @@ class Status extends React.Component {
     return (
       <div className="Status">
         <div>
-          <span className={String(this.props.midiSupport)}>{this.props.message}</span>
+          <span className={String(this.props.mixerReady)}>{this.props.message}</span>
         </div>
         {
           inputs.length > 0 &&
