@@ -310,7 +310,6 @@ ES-9 MIDI output ID: ${this.es9.output.id}
             requestVersion={this.requestVersion.bind(this)}
             requestConfig={this.requestConfig.bind(this)}
             requestMix={this.requestMix.bind(this)}
-            onMIDIFailure={this.onMIDIFailure.bind(this)}
           />
           <Mixes
             mixes={this.state.mixes}

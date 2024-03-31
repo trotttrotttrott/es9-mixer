@@ -50,8 +50,7 @@ class MIDI extends React.Component {
     var type = this.types[message.data[5]];
 
     if (type === undefined) {
-      this.props.es9.input.onmidimessage = null;
-      this.props.onMIDIFailure('The selected MIDI device does not appear to be an ES-9');
+      this.props.midiRx(message.data);
       return;
     }
 
